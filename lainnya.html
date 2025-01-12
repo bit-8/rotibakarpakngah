@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web dengan Efek Hujan</title>
+    <link rel="stylesheet" href="lainnya.css">
+</head>
+<body>
+    <!-- Overlay loading screen -->
+    <div id="loading-overlay"></div>
+
+    <div id="rain-container"></div>
+    <header>
+        <nav class="navbar">
+            <div>
+                <a href="foto.html">Foto</a>
+                <a href="pemesan.html">Pemesanan</a>
+                <a href="about.html">About</a>
+                <a href="index.html">Home</a>
+            </div>
+            <div>
+                <img src="img/logo.png" alt="Logo" class="logo">
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7979.63468152896!2d109.36724449975277!3d-0.0401495552476504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e1d596315fdd673%3A0x407cad81723c258a!2sRoti%20Bakar%20pakngah!5e0!3m2!1sid!2sid!4v1736625169468!5m2!1sid!2sid"
+                width="100%" height="450" style="border:0;" allowfullscreen=""
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </section>
+        <div class="divider">
+        <p>Roti Bakar PakNgah adalah kedai roti bakar yang terletak di Jalan Tanjung Raya II, Jalan Tani, Kelurahan Saigon, Kecamatan Pontianak Timur, Kota Pontianak, Kalimantan Barat, dengan kode pos 78132.</p>
+        <p>Kedai ini menawarkan berbagai varian roti bakar dengan harga terjangkau dan rasa khas yang berkualitas. Beberapa menu yang tersedia antara lain roti dengan selai berbagai rasa dan susu.</p>
+        <p>Jam operasional Roti Bakar PakNgah adalah sebagai berikut:</p>
+        <ul>
+            <li>Senin hingga Jumat: 01.00 - 21.00 WIB</li>
+            <li>Sabtu dan Minggu: Tutup</li>
+        </ul>
+        <p>Untuk informasi lebih lanjut atau pemesanan, Anda dapat menghubungi nomor telepon 0858-2266-6497.</p>
+        <p>Selain itu, Roti Bakar PakNgah juga memiliki situs web resmi yang dapat diakses untuk informasi tambahan mengenai lokasi dan menu yang ditawarkan.</p>
+
+       </div>
+
+        <section>
+            <iframe width="100%" height="1080px" src="https://www.youtube.com/embed/sYeyi-ho9T4?si=aQFQrL8DqkDBFsIh"
+                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </section>
+
+        <div class="divider">
+            <p>Roti ini dibuat tanpa bahan pengawet, sehingga aman untuk dikonsumsi oleh semua kalangan, dari anak-anak hingga orang dewasa. Proses produksinya memastikan setiap roti tetap segar meskipun tanpa bahan tambahan. Kemasan toples transparan yang digunakan juga membantu menjaga kesegarannya, dengan setiap toples berisi 20 buah roti. Komitmen terhadap kualitas inilah yang menjadi alasan utama roti ini tetap menjadi pilihan favorit masyarakat.</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Denathan & Lutfi Ibnurahim. All rights reserved.</p>
+          </div>
+        <div class="footer-container">
+          <!-- Kolom 1 - Navigasi 1 -->
+          <div class="footer-column">
+            <h4>RotiBakarPakNgah</h4>
+            <ul>
+                <li><a href="foto.html">Foto</a></li>
+                <li><a href="pemesan.html">Pemesanan</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+          </div>
+      
+          <!-- Kolom 2 - Paragraf 1 -->
+    <div class="footer-column">
+        <h4>Informasi</h4>
+        <p>Pembuatan web tugas akhir pemograman website dasar</p>
+      </div>
+  
+      <!-- Kolom 3 - Paragraf 2 -->
+      <div class="footer-column">
+        <h4>info kelompok</h4>
+        <p>Nama : Denathan</p>
+        <p>Nama : Lutfi Ibnurahim</p>
+      </div>
+  
+      
+          <!-- Kolom 4 - Sosial Media dan Kontak -->
+          <div class="footer-column">
+            <h4>Social Media</h4>
+            <div class="social-links">
+              <a href="https://www.instagram.com/natvhan__?igsh=bml6eGp0OWh6Z3N5" target="_blank" class="social-icon instagram">Instagram</a>
+              <a href="https://www.facebook.com/profile.php?id=61552028236238&mibextid=ZbWKwL" target="_blank" class="social-icon facebook">Facebook</a>
+              <a href="mailto:231220024@unumuhpnk.ac.id" class="social-icon email">Email</a>
+            </div>
+          </div>
+        </div>
+      
+      </footer>
+    <script>
+        function createRaindrop() {
+            const rainContainer = document.getElementById('rain-container');
+            const raindrop = document.createElement('div');
+            raindrop.classList.add('raindrop');
+            raindrop.style.left = Math.random() * 100 + 'vw';
+            rainContainer.appendChild(raindrop);
+
+            setTimeout(() => {
+                raindrop.remove();
+            }, 5000);
+        }
+
+        setInterval(createRaindrop, 200);
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loadingOverlay = document.getElementById('loading-overlay');
+                loadingOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                }, 1000);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
