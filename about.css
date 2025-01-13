@@ -91,6 +91,23 @@
         }
 
         /* Animasi untuk h1 */
+        .content-section h1 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            animation: slideInFromRight 1s ease-out;
+        }
+
+        /* Layout Utama */
+        .main-wrapper {
+            display: flex;
+            max-width: 1200px;
+            margin: 80px auto 0;
+            gap: 30px;
+            position: relative;
+        }
+
         /* Navigasi Samping */
 .section-nav {
     width: 250px;
