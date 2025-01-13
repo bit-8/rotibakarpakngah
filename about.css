@@ -91,51 +91,90 @@
         }
 
         /* Animasi untuk h1 */
-        .content-section h1 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-            animation: slideInFromRight 1s ease-out;
-        }
-
-        /* Layout Utama */
-        .main-wrapper {
-            display: flex;
-            max-width: 1200px;
-            margin: 80px auto 0;
-            gap: 30px;
-            position: relative;
-        }
-
         /* Navigasi Samping */
-        .section-nav {
-            width: 250px;
-            position: sticky;
-            top: 100px;
-            align-self: flex-start;
-            max-height: calc(100vh - 120px);
-            overflow-y: auto;
-        }
+.section-nav {
+    width: 250px;
+    position: sticky;
+    top: 100px;
+    align-self: flex-start;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
 
-        .section-nav ul {
-            list-style: none;
-        }
+.section-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
 
-        .section-nav ul li a {
-            display: block;
-            padding: 10px;
-            color: var(--text-color);
-            text-decoration: none;
-            border-left: 3px solid transparent;
-            transition: all 0.3s ease;
-        }
+.section-nav ul li a {
+    display: block;
+    padding: 10px;
+    color: var(--text-color);
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+}
 
-        .section-nav ul li a:hover,
-        .section-nav ul li a.active {
-            background-color: rgba(78, 205, 196, 0.1);
-            border-left-color: var(--secondary-color);
-        }
+.section-nav ul li a:hover,
+.section-nav ul li a.active {
+    background-color: rgba(78, 205, 196, 0.1);
+    border-left-color: var(--secondary-color);
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+    .section-nav {
+        width: 200px; /* Mengurangi lebar navigasi untuk tablet */
+    }
+
+    .section-nav ul li a {
+        padding: 8px; /* Mengurangi padding untuk menjaga proporsi */
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-nav {
+        width: 100%; /* Navigasi memenuhi lebar layar */
+        position: relative; /* Tidak sticky pada layar kecil */
+        top: auto;
+        max-height: none;
+        overflow-y: visible;
+        border-top: 1px solid var(--secondary-color); /* Menambah pemisah */
+        padding: 1rem 0;
+    }
+
+    .section-nav ul {
+        display: flex; /* Tampilkan navigasi secara horizontal */
+        overflow-x: auto; /* Tambahkan scroll horizontal jika item terlalu banyak */
+        gap: 10px; /* Jarak antar item */
+    }
+
+    .section-nav ul li {
+        flex: 0 0 auto; /* Pastikan item tidak menyusut */
+    }
+
+    .section-nav ul li a {
+        border-left: none;
+        border-bottom: 2px solid transparent;
+        text-align: center;
+    }
+
+    .section-nav ul li a:hover,
+    .section-nav ul li a.active {
+        background-color: transparent;
+        border-bottom-color: var(--secondary-color); /* Ganti border menjadi bawah */
+    }
+}
+
+@media (max-width: 480px) {
+    .section-nav ul li a {
+        font-size: 0.8rem; /* Ukuran teks lebih kecil pada layar ponsel */
+        padding: 6px;
+    }
+}
+
 
         /* Konten Sections */
         .content-container {
