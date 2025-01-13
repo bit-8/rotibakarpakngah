@@ -258,8 +258,7 @@ footer {
     }
   }
   
-  .audio-container {
-    
+ .audio-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -268,47 +267,59 @@ footer {
     margin: auto; /* Untuk memusatkan kontainer secara horizontal */
     margin-top: 5%;
     text-align: center; /* Untuk menyelaraskan teks di dalam kontainer */
-    min-height:fit-content; /* Agar kontainer memenuhi tinggi layar */
+    min-height: fit-content; /* Agar kontainer memenuhi tinggi layar */
     background-color: #dadada;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
-
 }
-
 
 #albumImage {
-
     width: 250px;
-
     height: 250px;
-
     border-radius: 50%;
-
     transition: transform 0.5s linear;
-
 }
-
 
 .rotating {
-
     animation: rotate 5s linear infinite;
-
 }
 
-
 @keyframes rotate {
-
     from {
-
         transform: rotate(0deg);
-
     }
-
     to {
-
         transform: rotate(360deg);
+    }
+}
 
+/* Responsiveness */
+
+/* Untuk layar tablet (max-width: 768px) */
+@media (max-width: 768px) {
+    .audio-container {
+        width: 70%; /* Lebar kontainer diperbesar untuk memanfaatkan layar */
+        padding: 15px; /* Mengurangi padding agar tetap proporsional */
+        margin-top: 8%;
     }
 
+    #albumImage {
+        width: 200px;
+        height: 200px; /* Ukuran gambar diperkecil untuk layar tablet */
+    }
+}
+
+/* Untuk layar ponsel (max-width: 480px) */
+@media (max-width: 480px) {
+    .audio-container {
+        width: 90%; /* Memenuhi hampir seluruh layar */
+        padding: 10px; /* Mengurangi padding lebih lanjut */
+        margin-top: 10%; /* Memberikan lebih banyak ruang di atas */
+    }
+
+    #albumImage {
+        width: 150px;
+        height: 150px; /* Ukuran gambar lebih kecil untuk ponsel */
+    }
 }
