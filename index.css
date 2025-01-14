@@ -1,8 +1,20 @@
-body {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    min-height: 100vh;
+:root {
+    --warna-utama: #3498db;
+    --warna-latar: #f4f4f4;
+}
+
+* {
     margin: 0;
-    font-family: 'Poppins', 'Roboto', 'Open Sans', 'Arial', sans-serif;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html{
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: var(--warna-latar);
+    overflow-x: hidden;
+    width: 100%;
 }
 
 header {
@@ -56,89 +68,203 @@ header {
     transform: scale(1.1);
 }
 
-/* Centering the video */
-.video-container {
-    background-color: #dd8b6a;
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: start; /* Center vertically (if needed) */
-    
-}
-
-.mainvid {
-    max-width: 100%; /* Make the video responsive */
-    min-width: 1280px;
-    height: 720px; /* Maintain aspect ratio */
-}
-
-.content {
-    padding: 20px;
-    text-align: center;
-}
-
-.content h3 {
+.separator {
     margin-top: 10%;
-    font-size: 2em;
-    margin-bottom: 20px;
+    height: 500px;
+    width: 200%;
+    margin-bottom: 5%;
+}
+.photo-gallery {
+    max-width: 90%; /* Lebih fleksibel untuk layar kecil */
+    margin: 0 auto;
+    padding: 2rem;
 }
 
-.product {
+.photo-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    flex-direction: column;
+    gap: 2rem;
+    justify-content: space-evenly;
     align-items: center;
 }
 
-.product-item {
+.photo-item {
     background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 80%;
-    text-align: center;
-    padding: 15px;
+    flex: 1 1 calc(33.33% - 2rem); /* Ukuran default untuk layar besar */
+    max-width: calc(33.33% - 2rem);
+    border-radius: 10px;
+    overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.product-item img {
+.photo-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.photo-item img {
     width: 100%;
-    border-radius: 5px;
+    height: auto; /* Membuat tinggi fleksibel */
+    object-fit: cover;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
-.product-item h4 {
-    margin: 10px 0;
-    font-size: 1.5em;
+.photo-item:hover img {
+    transform: scale(1.05);
 }
 
-.product-item p {
-    font-size: 1em;
-    color: #555;
+.photo-caption {
+    padding: 1rem;
+    background-color: #f8f9fa;
 }
 
-.separator {
-  margin-top: 1%;
-    margin-bottom: 1%;
-    background-color: #c9c9c981;
-    height: 500px;
+.photo-caption h3 {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.photo-caption p {
+    color: #666;
+}
+
+/* Media Query untuk Responsivitas */
+@media (max-width: 1024px) {
+    .photo-item {
+        flex: 1 1 calc(50% - 2rem); /* 2 kolom di tablet */
+        max-width: calc(50% - 2rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .photo-item {
+        flex: 1 1 calc(100% - 2rem); /* 1 kolom di ponsel */
+        max-width: calc(100% - 2rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .photo-gallery {
+        padding: 1rem; /* Mengurangi padding pada layar kecil */
+    }
+
+    .photo-caption {
+        padding: 0.5rem;
+    }
+
+    .photo-caption h3 {
+        font-size: 1rem; /* Menyesuaikan ukuran font */
+    }
+
+    .photo-caption p {
+        font-size: 0.875rem;
+    }
+}
+
+
+
+.image-container {
+    margin-top: 10%;
+    position: relative;
     width: 100%;
+    height: auto;
+    min-height: 200px;
+    overflow: hidden;
+    border: 2px solid #ccc;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.container {
+.image-track {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; /* Agar konten vertikal diatur */
-    width: 80%;
-    margin: auto; /* Untuk memusatkan kontainer secara horizontal */
-    text-align: center; /* Untuk menyelaraskan teks di dalam kontainer */
-    min-height:fit-content; /* Agar kontainer memenuhi tinggi layar */
-    background-color: #dd8b6a;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: scroll 10s linear infinite;
 }
 
-/* Footer */
+.image-track img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 0 10px;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .photo-container {
+        gap: 1rem;
+    }
+
+    .photo-item {
+        width: 100%;
+    }
+
+    .photo-item img {
+        max-height: 400px;
+    }
+
+    .image-track img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .photo-gallery {
+        padding: 1rem;
+    }
+
+    .photo-item img {
+        max-height: 300px;
+    }
+
+    .photo-caption h3 {
+        font-size: 1.2rem;
+    }
+
+    .photo-caption p {
+        font-size: 0.9rem;
+    }
+
+    .image-track img {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Duplicate track to create seamless scrolling */
+.image-track::after {
+    content: '';
+    display: block;
+    width: 100%;
+    position: absolute;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+@media (max-width: 768px) {
+    .photo-container {
+        grid-template-columns: 1fr;
+    }
+}
 footer {
     background-color: #333;
     color: white;
@@ -258,68 +384,3 @@ footer {
     }
   }
   
- .audio-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; /* Agar konten vertikal diatur */
-    width: 35%;
-    margin: auto; /* Untuk memusatkan kontainer secara horizontal */
-    margin-top: 5%;
-    text-align: center; /* Untuk menyelaraskan teks di dalam kontainer */
-    min-height: fit-content; /* Agar kontainer memenuhi tinggi layar */
-    background-color: #dadada;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
-}
-
-#albumImage {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    transition: transform 0.5s linear;
-}
-
-.rotating {
-    animation: rotate 5s linear infinite;
-}
-
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Responsiveness */
-
-/* Untuk layar tablet (max-width: 768px) */
-@media (max-width: 768px) {
-    .audio-container {
-        width: 70%; /* Lebar kontainer diperbesar untuk memanfaatkan layar */
-        padding: 15px; /* Mengurangi padding agar tetap proporsional */
-        margin-top: 8%;
-    }
-
-    #albumImage {
-        width: 200px;
-        height: 200px; /* Ukuran gambar diperkecil untuk layar tablet */
-    }
-}
-
-/* Untuk layar ponsel (max-width: 480px) */
-@media (max-width: 480px) {
-    .audio-container {
-        width: 90%; /* Memenuhi hampir seluruh layar */
-        padding: 10px; /* Mengurangi padding lebih lanjut */
-        margin-top: 10%; /* Memberikan lebih banyak ruang di atas */
-    }
-
-    #albumImage {
-        width: 150px;
-        height: 150px; /* Ukuran gambar lebih kecil untuk ponsel */
-    }
-}
