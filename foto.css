@@ -75,24 +75,23 @@ header {
     margin-bottom: 5%;
 }
 .photo-gallery {
-    max-width: 1200px;
+    max-width: 60%;
     margin: 0 auto;
     padding: 2rem;
 }
 
 .photo-container {
     display: flex;
-    width: 100%;
-    gap: 2rem;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap; /* Membungkus elemen ke baris baru */
+    gap: 2rem; /* Memberi jarak antar elemen */
+    justify-content: space-evenly; /* Menyebarkan elemen dengan jarak rata */
+    align-items: center; /* Menyelaraskan elemen secara vertikal */
 }
 
 .photo-item {
     background-color: white;
-    width: 100%;
-    max-width: 800px;
+    flex: 1 1 calc(33.33% - 2rem); /* Lebar minimum 33.33% minus gap */
+    max-width: calc(33.33% - 2rem); /* Membatasi ukuran maksimum */
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -108,14 +107,15 @@ header {
 
 .photo-item img {
     width: 100%;
-    height: auto;
-    max-height: 700px;
-    object-fit: cover;
+    max-width: 350px; /* Maksimum lebar 500px */
+    height: 350px; /* Tinggi tetap 500px */
+    object-fit: cover; /* Memastikan gambar mengisi elemen tanpa distorsi */
+    overflow: hidden; /* Memotong gambar yang melebihi dimensi */
     transition: transform 0.3s ease;
 }
 
 .photo-item:hover img {
-    transform: scale(1.05);
+    transform: scale(1.05); /* Efek zoom saat hover */
 }
 
 .photo-caption {
@@ -131,6 +131,7 @@ header {
 .photo-caption p {
     color: #666;
 }
+
 
 .image-container {
     margin-top: 10%;
