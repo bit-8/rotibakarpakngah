@@ -75,23 +75,23 @@ header {
     margin-bottom: 5%;
 }
 .photo-gallery {
-    max-width: 60%;
+    max-width: 90%; /* Lebih fleksibel untuk layar kecil */
     margin: 0 auto;
     padding: 2rem;
 }
 
 .photo-container {
     display: flex;
-    flex-wrap: wrap; /* Membungkus elemen ke baris baru */
-    gap: 2rem; /* Memberi jarak antar elemen */
-    justify-content: space-evenly; /* Menyebarkan elemen dengan jarak rata */
-    align-items: center; /* Menyelaraskan elemen secara vertikal */
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .photo-item {
     background-color: white;
-    flex: 1 1 calc(33.33% - 2rem); /* Lebar minimum 33.33% minus gap */
-    max-width: calc(33.33% - 2rem); /* Membatasi ukuran maksimum */
+    flex: 1 1 calc(33.33% - 2rem); /* Ukuran default untuk layar besar */
+    max-width: calc(33.33% - 2rem);
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -107,15 +107,14 @@ header {
 
 .photo-item img {
     width: 100%;
-    max-width: 350px; /* Maksimum lebar 500px */
-    height: 350px; /* Tinggi tetap 500px */
-    object-fit: cover; /* Memastikan gambar mengisi elemen tanpa distorsi */
-    overflow: hidden; /* Memotong gambar yang melebihi dimensi */
+    height: auto; /* Membuat tinggi fleksibel */
+    object-fit: cover;
+    overflow: hidden;
     transition: transform 0.3s ease;
 }
 
 .photo-item:hover img {
-    transform: scale(1.05); /* Efek zoom saat hover */
+    transform: scale(1.05);
 }
 
 .photo-caption {
@@ -131,6 +130,40 @@ header {
 .photo-caption p {
     color: #666;
 }
+
+/* Media Query untuk Responsivitas */
+@media (max-width: 1024px) {
+    .photo-item {
+        flex: 1 1 calc(50% - 2rem); /* 2 kolom di tablet */
+        max-width: calc(50% - 2rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .photo-item {
+        flex: 1 1 calc(100% - 2rem); /* 1 kolom di ponsel */
+        max-width: calc(100% - 2rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .photo-gallery {
+        padding: 1rem; /* Mengurangi padding pada layar kecil */
+    }
+
+    .photo-caption {
+        padding: 0.5rem;
+    }
+
+    .photo-caption h3 {
+        font-size: 1rem; /* Menyesuaikan ukuran font */
+    }
+
+    .photo-caption p {
+        font-size: 0.875rem;
+    }
+}
+
 
 
 .image-container {
