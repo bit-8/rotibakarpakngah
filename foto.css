@@ -75,7 +75,7 @@ header {
     margin-bottom: 5%;
 }
 .photo-gallery {
-    max-width: 90%; /* Lebih fleksibel untuk layar kecil */
+    max-width: 90%;
     margin: 0 auto;
     padding: 2rem;
 }
@@ -90,7 +90,7 @@ header {
 
 .photo-item {
     background-color: white;
-    flex: 1 1 calc(33.33% - 2rem); /* Ukuran default untuk layar besar */
+    flex: 1 1 calc(33.33% - 2rem); 
     max-width: calc(33.33% - 2rem);
     border-radius: 10px;
     overflow: hidden;
@@ -107,7 +107,7 @@ header {
 
 .photo-item img {
     width: 100%;
-    height: auto; /* Membuat tinggi fleksibel */
+    height: auto; 
     object-fit: cover;
     overflow: hidden;
     transition: transform 0.3s ease;
@@ -134,21 +134,21 @@ header {
 /* Media Query untuk Responsivitas */
 @media (max-width: 1024px) {
     .photo-item {
-        flex: 1 1 calc(50% - 2rem); /* 2 kolom di tablet */
+        flex: 1 1 calc(50% - 2rem);
         max-width: calc(50% - 2rem);
     }
 }
 
 @media (max-width: 768px) {
     .photo-item {
-        flex: 1 1 calc(100% - 2rem); /* 1 kolom di ponsel */
+        flex: 1 1 calc(100% - 2rem);
         max-width: calc(100% - 2rem);
     }
 }
 
 @media (max-width: 480px) {
     .photo-gallery {
-        padding: 1rem; /* Mengurangi padding pada layar kecil */
+        padding: 1rem;
     }
 
     .photo-caption {
@@ -156,7 +156,7 @@ header {
     }
 
     .photo-caption h3 {
-        font-size: 1rem; /* Menyesuaikan ukuran font */
+        font-size: 1rem; 
     }
 
     .photo-caption p {

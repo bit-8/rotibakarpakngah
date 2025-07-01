@@ -1,4 +1,4 @@
-/* Reset Styling */
+
 * {
   margin: 0;
   padding: 0;
@@ -9,7 +9,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  overflow-y: auto; /* Aktifkan scroll vertikal */
+  overflow-y: auto;
   line-height: 1.6;
   color: #333;
 }
