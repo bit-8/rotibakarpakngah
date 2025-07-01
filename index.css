@@ -60,15 +60,14 @@ header {
 .video-container {
     background-color: #dd8b6a;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: start; /* Center vertically (if needed) */
-    
+    justify-content: center;
+    align-items: start;
 }
 
 .mainvid {
-    max-width: 100%; /* Make the video responsive */
+    max-width: 100%; 
     min-width: 1280px;
-    height: 720px; /* Maintain aspect ratio */
+    height: 720px;
 }
 
 .content {
@@ -127,11 +126,11 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column; /* Agar konten vertikal diatur */
+    flex-direction: column; 
     width: 80%;
-    margin: auto; /* Untuk memusatkan kontainer secara horizontal */
-    text-align: center; /* Untuk menyelaraskan teks di dalam kontainer */
-    min-height:fit-content; /* Agar kontainer memenuhi tinggi layar */
+    margin: auto;
+    text-align: center;
+    min-height:fit-content; 
     background-color: #dd8b6a;
     padding: 20px;
     border-radius: 5px;
@@ -262,12 +261,12 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column; /* Agar konten vertikal diatur */
+    flex-direction: column;
     width: 35%;
-    margin: auto; /* Untuk memusatkan kontainer secara horizontal */
+    margin: auto;
     margin-top: 5%;
-    text-align: center; /* Untuk menyelaraskan teks di dalam kontainer */
-    min-height: fit-content; /* Agar kontainer memenuhi tinggi layar */
+    text-align: center; 
+    min-height: fit-content;
     background-color: #dadada;
     padding: 20px;
     border-radius: 5px;
@@ -299,27 +298,27 @@ footer {
 /* Untuk layar tablet (max-width: 768px) */
 @media (max-width: 768px) {
     .audio-container {
-        width: 70%; /* Lebar kontainer diperbesar untuk memanfaatkan layar */
-        padding: 15px; /* Mengurangi padding agar tetap proporsional */
+        width: 70%; 
+        padding: 15px;
         margin-top: 8%;
     }
 
     #albumImage {
         width: 200px;
-        height: 200px; /* Ukuran gambar diperkecil untuk layar tablet */
+        height: 200px; 
     }
 }
 
 /* Untuk layar ponsel (max-width: 480px) */
 @media (max-width: 480px) {
     .audio-container {
-        width: 90%; /* Memenuhi hampir seluruh layar */
-        padding: 10px; /* Mengurangi padding lebih lanjut */
-        margin-top: 10%; /* Memberikan lebih banyak ruang di atas */
+        width: 90%; 
+        padding: 10px; 
+        margin-top: 10%; 
     }
 
     #albumImage {
         width: 150px;
-        height: 150px; /* Ukuran gambar lebih kecil untuk ponsel */
+        height: 150px;
     }
 }
