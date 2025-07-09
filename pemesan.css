@@ -1,76 +1,9 @@
-body {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    min-height: 100vh;
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-header {
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-    position: relative;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navbar a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    position: relative;
-    overflow: hidden;
-}
-
-.navbar a::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: 0;
-    height: 2px;
-    background: white;
-    transition: width 0.3s ease, left 0.3s ease;
-}
-
-.navbar a:hover::after {
-    width: 100%;
-    left: 0;
-}
-
-.navbar a:hover {
-    transform: translateY(-2px);
-}
-
-.logo {
-    height: 60px;
-    transition: transform 0.3s ease;
-}
-
-.logo:hover {
-    transform: scale(1.1);
-}
-
 .container-custom {
     background: white;
     border-radius: 15px;
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
     padding: 40px;
     margin-top: 20px;
-}
-
-.form-section h2 {
-    color: #007bff;
-}
-
-.custom-form-control {
-    border-radius: 10px;
 }
 
 .custom-form-control:focus {
@@ -82,8 +15,8 @@ header {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     background: #25D366;
     border-radius: 50%;
     display: flex;
@@ -92,6 +25,7 @@ header {
     cursor: pointer;
     transition: transform 0.3s ease, background-color 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1050;
 }
 
 .whatsapp-circle:hover {
@@ -101,7 +35,7 @@ header {
 
 .profile-box {
     position: fixed;
-    bottom: 110px;
+    bottom: 100px;
     right: 30px;
     width: 300px;
     background: white;
@@ -110,6 +44,7 @@ header {
     padding: 20px;
     display: none;
     animation: slideUp 0.3s ease;
+    z-index: 1040;
 }
 
 @keyframes slideUp {
@@ -130,138 +65,9 @@ header {
 }
 
 .profile-image {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     margin-right: 15px;
     object-fit: cover;
 }
-
-footer {
-    margin-top: 1%;
-    background-color: #333;
-    color: white;
-    padding: 40px 0;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Footer Container */
-  .footer-container {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  
-  /* Kolom footer */
-  .footer-column {
-    width: 22%;
-  }
-  
-  .footer-column h4 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    font-weight: bold;
-  }
-  
-  /* Daftar link navigasi */
-  .footer-column ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .footer-column ul li {
-    margin-bottom: 10px;
-  }
-  
-  .footer-column ul li a {
-    color: #ecf0f1;
-    text-decoration: none;
-    font-size: 14px;
-    transition: color 0.3s;
-  }
-  
-  .footer-column ul li a:hover {
-    color: #db8534;
-  }
-  
-  /* Paragraf untuk Kolom 2 dan 3 */
-  .footer-column p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #ecf0f1;
-    margin-bottom: 15px;
-  }
-  
-  /* Penghubung sosial media */
-  .social-links {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .social-links .social-icon {
-    text-decoration: none;
-    color: white;
-    background-color: #474747;
-    padding: 10px 20px;
-    margin-bottom: 10px;
-    text-align: center;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: background-color 0.3s;
-  }
-  
-  .social-links .social-icon:hover {
-    background-color: #cecece;
-  }
-  
-  /* Style untuk footer bagian bawah */
-  .footer-bottom {
-    text-align: center;
-    margin-top: 5px;
-    margin-bottom: 2%;
-    font-size: 14px;
-    color: #bdc3c7;
-  }
-
- @media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        align-items: center;
-    }
-  
-    .navbar a {
-        margin: 10px 0;
-    }
-  
-    .footer-container {
-        flex-direction: column;
-        align-items: center;
-    }
-  
-    .footer-column {
-        width: 100%;
-        text-align: center;
-    }
-  
-    .logo {
-        height: 50px;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .navbar a {
-        font-size: 14px;
-    }
-  
-    iframe {
-        height: 300px;
-    }
-  
-    .logo {
-        height: 40px;
-    }
-  }
-  
-  

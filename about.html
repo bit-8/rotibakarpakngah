@@ -4,138 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-       
-    </style>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="about.css">
 </head>
 <body>
     <!-- Navigasi Atas -->
-    <header>
-        <nav class="navbar">
-            <div>
-                <a href="foto.html">Foto</a>
-                <a href="pemesan.html">Pemesanan</a>
-                <a href="index.html">Home</a>
-                <a href="lainnya.html">Lainnya</a>
-            </div>
-            <div>
-                <img src="img/logo.png" alt="Logo" class="logo">
+    <header class="bg-dark text-white p-3 shadow">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="img/logo.png" alt="Logo" style="height: 40px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="foto.html">Foto</a></li>
+                        <li class="nav-item"><a class="nav-link" href="pemesan.html">Pemesanan</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="lainnya.html">Lainnya</a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
 
     <!-- Wrapper Utama -->
-    <div class="main-wrapper">
-        <!-- Navigasi Samping -->
-        <nav class="section-nav">
-            <ul>
-                <li><a href="#section1" class="active">Pendahuluan</a></li>
-                <li><a href="#section2">Sejarah</a></li>
-                <li><a href="#section3">Keunggulan</a></li>
-                <li><a href="#section4">Rasa</a></li>
-                <li><a href="#section5">Kesimpulan</a></li>
-            </ul>
-        </nav>
+    <div class="container main-wrapper">
+        <div class="row">
+            <!-- Navigasi Samping -->
+            <div class="col-lg-3">
+                <nav class="section-nav sticky-top">
+                    <ul>
+                        <li><a href="#section1" class="active">Pendahuluan</a></li>
+                        <li><a href="#section2">Sejarah</a></li>
+                        <li><a href="#section3">Keunggulan</a></li>
+                        <li><a href="#section4">Rasa</a></li>
+                        <li><a href="#section5">Kesimpulan</a></li>
+                    </ul>
+                </nav>
+            </div>
 
-        <!-- Konten Utama -->
-        <div class="content-container">
-            <section id="section1" class="content-section">
-                <h1>Pendahuluan</h1>
-                <p>Roti Bakar Pak Ngah adalah sebuah merek lokal yang telah berhasil mencuri perhatian masyarakat dengan produk roti bakar manis khasnya. Roti ini menjadi pilihan favorit karena keunikannya yang tanpa isi, sehingga memberikan fleksibilitas kepada konsumen untuk menikmatinya dengan berbagai jenis makanan pendamping sesuai selera. Dengan kombinasi rasa khas, harga yang terjangkau, dan strategi distribusi yang cerdas, Roti Bakar Pak Ngah terus mendapatkan tempat di hati masyarakat.</p>
-            </section>
+            <!-- Konten Utama -->
+            <div class="col-lg-9">
+                <div class="content-container">
+                    <section id="section1" class="content-section">
+                        <h1>Pendahuluan</h1>
+                        <p>Roti Bakar Pak Ngah adalah sebuah merek lokal yang telah berhasil mencuri perhatian masyarakat dengan produk roti bakar manis khasnya. Roti ini menjadi pilihan favorit karena keunikannya yang tanpa isi, sehingga memberikan fleksibilitas kepada konsumen untuk menikmatinya dengan berbagai jenis makanan pendamping sesuai selera. Dengan kombinasi rasa khas, harga yang terjangkau, dan strategi distribusi yang cerdas, Roti Bakar Pak Ngah terus mendapatkan tempat di hati masyarakat.</p>
+                    </section>
 
-            <section id="section2" class="content-section">
-                <h1>Sejarah</h1>
-                <p>Roti Bakar Pak Ngah memulai perjalanannya sebagai usaha kecil di daerah lokal, dengan visi menghadirkan roti yang lezat dan sehat untuk semua kalangan. Dari awal yang sederhana, roti ini didistribusikan ke warung-warung kopi dan toko kelontong di sekitar wilayah. Tempat-tempat ini sering menjadi lokasi nongkrong favorit bagi berbagai kelompok, dari bapak-bapak hingga anak muda. Dengan strategi distribusi yang sederhana namun efektif, Roti Bakar Pak Ngah perlahan namun pasti membangun reputasi sebagai camilan yang lezat dan mudah dijangkau.</p>
-            </section>
+                    <section id="section2" class="content-section">
+                        <h1>Sejarah</h1>
+                        <p>Roti Bakar Pak Ngah memulai perjalanannya sebagai usaha kecil di daerah lokal, dengan visi menghadirkan roti yang lezat dan sehat untuk semua kalangan. Dari awal yang sederhana, roti ini didistribusikan ke warung-warung kopi dan toko kelontong di sekitar wilayah. Tempat-tempat ini sering menjadi lokasi nongkrong favorit bagi berbagai kelompok, dari bapak-bapak hingga anak muda. Dengan strategi distribusi yang sederhana namun efektif, Roti Bakar Pak Ngah perlahan namun pasti membangun reputasi sebagai camilan yang lezat dan mudah dijangkau.</p>
+                    </section>
 
-            <section id="section3" class="content-section">
-                <h1>Keunggulan</h1>
-                <p>Keunggulan utama Roti Bakar Pak Ngah terletak pada kualitas bahan yang digunakan. Roti ini dibuat tanpa bahan pengawet, sehingga aman untuk dikonsumsi oleh semua kalangan, dari anak-anak hingga orang dewasa. Proses produksinya memastikan setiap roti tetap segar meskipun tanpa bahan tambahan. Kemasan toples transparan yang digunakan juga membantu menjaga kesegarannya, dengan setiap toples berisi 20 buah roti. Komitmen terhadap kualitas inilah yang menjadi alasan utama roti ini tetap menjadi pilihan favorit masyarakat.</p>
-            </section>
+                    <section id="section3" class="content-section">
+                        <h1>Keunggulan</h1>
+                        <p>Keunggulan utama Roti Bakar Pak Ngah terletak pada kualitas bahan yang digunakan. Roti ini dibuat tanpa bahan pengawet, sehingga aman untuk dikonsumsi oleh semua kalangan, dari anak-anak hingga orang dewasa. Proses produksinya memastikan setiap roti tetap segar meskipun tanpa bahan tambahan. Kemasan toples transparan yang digunakan juga membantu menjaga kesegarannya, dengan setiap toples berisi 20 buah roti. Komitmen terhadap kualitas inilah yang menjadi alasan utama roti ini tetap menjadi pilihan favorit masyarakat.</p>
+                    </section>
 
-            <section id="section4" class="content-section">
-                <h1>Rasa</h1>
-                <p>Rasa dari Roti Bakar Pak Ngah adalah salah satu daya tarik utama yang membuatnya berbeda dari produk lainnya. Meskipun tanpa isian, roti ini dapat dinikmati dengan berbagai pelengkap, seperti selai, keju, susu kental manis, atau bahkan makanan gurih seperti sarden dan sambal. Fleksibilitas ini membuat Roti Bakar Pak Ngah cocok untuk segala suasana, baik sebagai teman ngopi di pagi hari maupun sebagai camilan ringan di sore hari. Kombinasi tekstur yang lembut dengan rasa manis yang pas menjadikannya favorit bagi berbagai kalangan.</p>
-            </section>
+                    <section id="section4" class="content-section">
+                        <h1>Rasa</h1>
+                        <p>Rasa dari Roti Bakar Pak Ngah adalah salah satu daya tarik utama yang membuatnya berbeda dari produk lainnya. Meskipun tanpa isian, roti ini dapat dinikmati dengan berbagai pelengkap, seperti selai, keju, susu kental manis, atau bahkan makanan gurih seperti sarden dan sambal. Fleksibilitas ini membuat Roti Bakar Pak Ngah cocok untuk segala suasana, baik sebagai teman ngopi di pagi hari maupun sebagai camilan ringan di sore hari. Kombinasi tekstur yang lembut dengan rasa manis yang pas menjadikannya favorit bagi berbagai kalangan.</p>
+                    </section>
 
-            <section id="section5" class="content-section">
-                <h1>Kesimpulan</h1>
-                <p>Roti Bakar Pak Ngah tidak hanya menawarkan kelezatan, tetapi juga fleksibilitas dan nilai kesehatan. Dengan rasa khas, harga yang terjangkau, dan strategi distribusi yang efektif, roti ini berhasil menjadi bagian penting dari kehidupan masyarakat lokal. Apakah Anda sedang mencari camilan untuk melengkapi momen santai atau hidangan ringan yang bisa dinikmati kapan saja, Roti Bakar Pak Ngah adalah pilihan yang tidak akan mengecewakan.</p>
-            </section>
+                    <section id="section5" class="content-section">
+                        <h1>Kesimpulan</h1>
+                        <p>Roti Bakar Pak Ngah tidak hanya menawarkan kelezatan, tetapi juga fleksibilitas dan nilai kesehatan. Dengan rasa khas, harga yang terjangkau, dan strategi distribusi yang cerdas, roti ini berhasil menjadi bagian penting dari kehidupan masyarakat lokal. Apakah Anda sedang mencari camilan untuk melengkapi momen santai atau hidangan ringan yang bisa dinikmati kapan saja, Roti Bakar Pak Ngah adalah pilihan yang tidak akan mengecewakan.</p>
+                    </section>
+                </div>
+            </div>
         </div>
     </div>
 
-    <footer>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Denathan & Lutfi Ibnurahim. All rights reserved.</p>
-          </div>
-        <div class="footer-container">
-          <!-- Kolom 1 - Navigasi 1 -->
-          <div class="footer-column">
-            <h4>RotiBakarPakNgah</h4>
-            <ul>
-                <li><a href="foto.html">Foto</a></li>
-                <li><a href="pemesan.html">Pemesanan</a></li>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="lainnya.html">Lainnya</a></li>
-            </ul>
-          </div>
-      
-          <!-- Kolom 2 - Paragraf 1 -->
-    <div class="footer-column">
-        <h4>Informasi</h4>
-        <p>Pembuatan web tugas akhir pemograman website dasar</p>
-      </div>
-  
-      <!-- Kolom 3 - Paragraf 2 -->
-      <div class="footer-column">
-        <h4>info kelompok</h4>
-        <p>Nama : Denathan</p>
-        <p>Nama : Lutfi Ibnurahim</p>
-      </div>
-  
-      
-          <!-- Kolom 4 - Sosial Media dan Kontak -->
-          <div class="footer-column">
-            <h4>Social Media</h4>
-            <div class="social-links">
-              <a href="https://www.instagram.com/natvhan__?igsh=bml6eGp0OWh6Z3N5" target="_blank" class="social-icon instagram">Instagram</a>
-              <a href="https://www.facebook.com/profile.php?id=61552028236238&mibextid=ZbWKwL" target="_blank" class="social-icon facebook">Facebook</a>
-              <a href="mailto:231220024@unumuhpnk.ac.id" class="social-icon email">Email</a>
+    <footer class="bg-dark text-white mt-5 p-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h4>RotiBakarPakNgah</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="foto.html" class="text-white text-decoration-none">Foto</a></li>
+                        <li><a href="pemesan.html" class="text-white text-decoration-none">Pemesanan</a></li>
+                        <li><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+                        <li><a href="lainnya.html" class="text-white text-decoration-none">Lainnya</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h4>Informasi</h4>
+                    <p>Pembuatan web tugas akhir pemograman website dasar</p>
+                </div>
+                <div class="col-md-3">
+                    <h4>Info Kelompok</h4>
+                    <p>Nama : Denathan<br>Nama : Lutfi Ibnurahim</p>
+                </div>
+                <div class="col-md-3">
+                    <h4>Social Media</h4>
+                    <a href="https://www.instagram.com/natvhan__?igsh=bml6eGp0OWh6Z3N5" target="_blank" class="text-white text-decoration-none me-2">Instagram</a>
+                    <a href="https://www.facebook.com/profile.php?id=61552028236238&mibextid=ZbWKwL" target="_blank" class="text-white text-decoration-none me-2">Facebook</a>
+                    <a href="mailto:231220024@unumuhpnk.ac.id" class="text-white text-decoration-none">Email</a>
+                </div>
             </div>
-          </div>
+            <div class="text-center mt-3">
+                <p>&copy; 2025 Denathan & Lutfi Ibnurahim. All rights reserved.</p>
+            </div>
         </div>
-      
-      </footer>
-      
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         // Fungsi untuk update navigasi saat scroll
         function updateNavigation() {
             const sections = document.querySelectorAll('.content-section');
             const navLinks = document.querySelectorAll('.section-nav a');
-
-            let currentSection = sections[0];
+            let currentSectionId = '';
 
             sections.forEach(section => {
                 const rect = section.getBoundingClientRect();
-                
-                if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-                    currentSection = section;
+                if (rect.top <= 150 && rect.bottom >= 150) {
+                    currentSectionId = section.id;
                 }
             });
 
             navLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === `#${currentSection.id}`) {
+                if (link.getAttribute('href') === `#${currentSectionId}`) {
                     link.classList.add('active');
                 }
             });
         }
 
-        // Event listener untuk scroll
         window.addEventListener('scroll', updateNavigation);
     </script>
 </body>

@@ -4,140 +4,137 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galeri Foto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="foto.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div>
-                <a href="index.html">Home</a>
-                <a href="pemesan.html">Pemesanan</a>
-                <a href="about.html">About</a>
-                <a href="lainnya.html">Lainnya</a>
-            </div>
-            <div>
-                <img src="img/logo.png" alt="Logo" class="logo">
+    <header class="bg-dark text-white p-3 shadow">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="img/logo.png" alt="Logo" style="height: 40px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="pemesan.html">Pemesanan</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="lainnya.html">Lainnya</a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
 
-    <main class="photo-gallery">
-        <div class="photo-container">
-            <div class="photo-item fade-in">
-                <img src="img/founder.jpeg" alt="Foto founder">
-                <div class="photo-caption">
-                    <h3>Pemilik</h3>
-                    <p>Pak Ngah</p>
+    <main class="container photo-gallery">
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="photo-item">
+                    <img src="img/founder.jpeg" alt="Foto founder" class="img-fluid">
+                    <div class="photo-caption">
+                        <h3>Pemilik</h3>
+                        <p>Pak Ngah</p>
+                    </div>
                 </div>
             </div>
-            <div class="photo-item fade-in">
-                <img src="img/R1.jpeg" alt="Foto 1">
-                <div class="photo-caption">
-                    <h3>Roti Terbit</h3>
-                    <p>waktu takkan berlalu</p>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="photo-item">
+                    <img src="img/R1.jpeg" alt="Foto 1" class="img-fluid">
+                    <div class="photo-caption">
+                        <h3>Roti Terbit</h3>
+                        <p>waktu takkan berlalu</p>
+                    </div>
                 </div>
             </div>
-            <div class="photo-item fade-in">
-                <img src="img/R2.jpeg" alt="Foto 2">
-                <div class="photo-caption">
-                    <h3>gunung roti</h3>
-                    <p>sangat murah sangat enak</p>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="photo-item">
+                    <img src="img/R2.jpeg" alt="Foto 2" class="img-fluid">
+                    <div class="photo-caption">
+                        <h3>gunung roti</h3>
+                        <p>sangat murah sangat enak</p>
+                    </div>
                 </div>
             </div>
-            <div class="photo-item fade-in">
-                <img src="img/R5.jpeg" alt="Foto 3">
-                <div class="photo-caption">
-                    <h3>Lebih Banyak Roti?</h3>
-                    <p>apakah ini surga?</p>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="photo-item">
+                    <img src="img/R5.jpeg" alt="Foto 3" class="img-fluid">
+                    <div class="photo-caption">
+                        <h3>Lebih Banyak Roti?</h3>
+                        <p>apakah ini surga?</p>
+                    </div>
                 </div>
             </div>
-           
-            <div class="photo-item fade-in">
-                <img src="img/R6.jpeg" alt="Foto 4">
-                <div class="photo-caption">
-                    <h3>Roti hangat adalah yang terbaik!</h3>
-                    <p>Akan ku makan semua</p>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="photo-item">
+                    <img src="img/R6.jpeg" alt="Foto 4" class="img-fluid">
+                    <div class="photo-caption">
+                        <h3>Roti hangat adalah yang terbaik!</h3>
+                        <p>Akan ku makan semua</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        
-         <div class="image-container">
-        <div class="image-track">
-            <img src="img/R1.jpeg" alt="Image 1">
-            <img src="img/R2.jpeg" alt="Image 2">
-            <img src="img/R3.jpeg" alt="Image 3">
-            <img src="img/R4.jpeg" alt="Image 4">
-            <img src="img/R5.jpeg" alt="Image 5">
-            <img src="img/R6.jpeg" alt="Image 6">
-            <img src="img/roti1.jpeg" alt="Image 7">
-            <img src="img/roti2.jpeg" alt="Image 8">
-
-            <!-- Duplicate images for seamless effect -->
-            <img src="img/R1.jpeg" alt="Image 1">
-            <img src="img/R2.jpeg" alt="Image 2">
-            <img src="img/R3.jpeg" alt="Image 3">
-            <img src="img/R4.jpeg" alt="Image 4">
-            <img src="img/R5.jpeg" alt="Image 5">
-            <img src="img/R6.jpeg" alt="Image 6">
-            <img src="img/roti1.jpeg" alt="Image 7">
-            <img src="img/roti2.jpeg" alt="Image 8">
-
-            <img src="img/R1.jpeg" alt="Image 1">
-            <img src="img/R2.jpeg" alt="Image 2">
-            <img src="img/R3.jpeg" alt="Image 3">
-            <img src="img/R4.jpeg" alt="Image 4">
-            <img src="img/R5.jpeg" alt="Image 5">
-            <img src="img/R6.jpeg" alt="Image 6">
-            <img src="img/roti1.jpeg" alt="Image 7">
-            <img src="img/roti2.jpeg" alt="Image 8">
+        <div class="image-container mt-5">
+            <div class="image-track">
+                <img src="img/R1.jpeg" alt="Image 1">
+                <img src="img/R2.jpeg" alt="Image 2">
+                <img src="img/R3.jpeg" alt="Image 3">
+                <img src="img/R4.jpeg" alt="Image 4">
+                <img src="img/R5.jpeg" alt="Image 5">
+                <img src="img/R6.jpeg" alt="Image 6">
+                <img src="img/roti1.jpeg" alt="Image 7">
+                <img src="img/roti2.jpeg" alt="Image 8">
+                <!-- Duplicate images for seamless effect -->
+                <img src="img/R1.jpeg" alt="Image 1">
+                <img src="img/R2.jpeg" alt="Image 2">
+                <img src="img/R3.jpeg" alt="Image 3">
+                <img src="img/R4.jpeg" alt="Image 4">
+                <img src="img/R5.jpeg" alt="Image 5">
+                <img src="img/R6.jpeg" alt="Image 6">
+                <img src="img/roti1.jpeg" alt="Image 7">
+                <img src="img/roti2.jpeg" alt="Image 8">
+            </div>
         </div>
-    </div>
     </main>
 
-    <script src="script.js"></script>
-
-    <footer>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Denathan & Lutfi Ibnurahim. All rights reserved.</p>
-          </div>
-        <div class="footer-container">
-          <!-- Kolom 1 - Navigasi 1 -->
-          <div class="footer-column">
-            <h4>RotiBakarPakNgah</h4>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="pemesan.html">Pemesanan</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="lainnya.html">Lainnya</a></li>
-            </ul>
-          </div>
-      
-          <!-- Kolom 2 - Paragraf 1 -->
-    <div class="footer-column">
-        <h4>Informasi</h4>
-        <p>Pembuatan web tugas akhir pemograman website dasar</p>
-      </div>
-    
-      <!-- Kolom 3 - Paragraf 2 -->
-      <div class="footer-column">
-        <h4>info kelompok</h4>
-        <p>Nama : Denathan</p>
-        <p>Nama : Lutfi Ibnurahim</p>
-      </div>
-    
-      
-          <!-- Kolom 4 - Sosial Media dan Kontak -->
-          <div class="footer-column">
-            <h4>Social Media</h4>
-            <div class="social-links">
-              <a href="https://www.instagram.com/natvhan__?igsh=bml6eGp0OWh6Z3N5" target="_blank" class="social-icon instagram">Instagram</a>
-              <a href="https://www.facebook.com/profile.php?id=61552028236238&mibextid=ZbWKwL" target="_blank" class="social-icon facebook">Facebook</a>
-              <a href="mailto:231220024@unumuhpnk.ac.id" class="social-icon email">Email</a>
+    <footer class="bg-dark text-white mt-5 p-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h4>RotiBakarPakNgah</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+                        <li><a href="pemesan.html" class="text-white text-decoration-none">Pemesanan</a></li>
+                        <li><a href="about.html" class="text-white text-decoration-none">About</a></li>
+                        <li><a href="lainnya.html" class="text-white text-decoration-none">Lainnya</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h4>Informasi</h4>
+                    <p>Pembuatan web tugas akhir pemograman website dasar</p>
+                </div>
+                <div class="col-md-3">
+                    <h4>Info Kelompok</h4>
+                    <p>Nama : Denathan<br>Nama : Lutfi Ibnurahim</p>
+                </div>
+                <div class="col-md-3">
+                    <h4>Social Media</h4>
+                    <a href="https://www.instagram.com/natvhan__?igsh=bml6eGp0OWh6Z3N5" target="_blank" class="text-white text-decoration-none me-2">Instagram</a>
+                    <a href="https://www.facebook.com/profile.php?id=61552028236238&mibextid=ZbWKwL" target="_blank" class="text-white text-decoration-none me-2">Facebook</a>
+                    <a href="mailto:231220024@unumuhpnk.ac.id" class="text-white text-decoration-none">Email</a>
+                </div>
             </div>
-          </div>
+            <div class="text-center mt-3">
+                <p>&copy; 2025 Denathan & Lutfi Ibnurahim. All rights reserved.</p>
+            </div>
         </div>
-      
-      </footer>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
 </body>
 </html>

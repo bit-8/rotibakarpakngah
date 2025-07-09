@@ -1,325 +1,131 @@
+/* General & Fonts */
 body {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    min-height: 100vh;
-    margin: 0;
-    font-family: 'Poppins', 'Roboto', 'Open Sans', 'Arial', sans-serif;
+    font-family: 'Lato', sans-serif;
+    background-color: #FCFBF8; /* Creamy white background */
 }
 
-header {
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-    position: relative;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+    font-family: 'Montserrat', sans-serif;
 }
 
+.section-title {
+    font-weight: 700;
+    color: #4A4A4A; /* Dark grey for titles */
+    margin-bottom: 1rem;
+}
+
+/* Header & Navbar */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    transition: all 0.3s ease;
 }
 
-.navbar a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    position: relative;
-    overflow: hidden;
+.navbar .btn-primary {
+    background-color: #D9534F; /* A warm, inviting red */
+    border-color: #D9534F;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
-.navbar a::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: 0;
-    height: 2px;
-    background: white;
-    transition: width 0.3s ease, left 0.3s ease;
+.navbar .btn-primary:hover {
+    background-color: #C9302C;
+    border-color: #AC2925;
 }
 
-.navbar a:hover::after {
-    width: 100%;
-    left: 0;
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/R3a.jpeg') no-repeat center center;
+    background-size: cover;
+    padding: 8rem 0;
+    animation: fadeIn 1.5s ease-in-out;
 }
 
-.navbar a:hover {
-    transform: translateY(-2px);
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
 }
 
-.logo {
-    height: 60px;
-    transition: transform 0.3s ease;
+.hero-subtitle {
+    max-width: 600px;
+    margin: 1rem auto 2rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
 }
 
-.logo:hover {
-    transform: scale(1.1);
-}
-
-/* Centering the video */
-.video-container {
-    background-color: #dd8b6a;
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: start; /* Center vertically (if needed) */
-    
-}
-
-.mainvid {
-    max-width: 100%; /* Make the video responsive */
-    min-width: 1280px;
-    height: 720px; /* Maintain aspect ratio */
-}
-
-.content {
-    padding: 20px;
-    text-align: center;
-}
-
-.content h3 {
-    margin-top: 10%;
-    font-size: 2em;
-    margin-bottom: 20px;
-}
-
-.product {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
-
-.product-item {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 80%;
-    text-align: center;
-    padding: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.product-item img {
-    width: 100%;
-    border-radius: 5px;
-}
-
-.product-item h4 {
-    margin: 10px 0;
-    font-size: 1.5em;
-}
-
-.product-item p {
-    font-size: 1em;
-    color: #555;
-}
-
-.separator {
-  margin-top: 1%;
-    margin-bottom: 1%;
-    background-color: #c9c9c981;
-    height: 500px;
-    width: 100%;
-}
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; /* Agar konten vertikal diatur */
-    width: 80%;
-    margin: auto; /* Untuk memusatkan kontainer secara horizontal */
-    text-align: center; /* Untuk menyelaraskan teks di dalam kontainer */
-    min-height:fit-content; /* Agar kontainer memenuhi tinggi layar */
-    background-color: #dd8b6a;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Footer */
-footer {
-    background-color: #333;
-    color: white;
-    padding: 40px 0;
-    margin-top: 5%;
-  }
-  
-  .footer-container {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
+/* Interview & Audio Player Section */
+.interview-box {
+    max-width: 700px;
     margin: 0 auto;
-    padding: 0 20px;
-    flex-wrap: wrap;
-  }
-  
-  .footer-column {
-    width: 22%;
-    margin-bottom: 20px;
-  }
-  
-  .footer-column h4 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    font-weight: bold;
-  }
-  
-  .footer-column ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .footer-column ul li {
-    margin-bottom: 10px;
-  }
-  
-  .footer-column ul li a {
-    color: #ecf0f1;
-    text-decoration: none;
-    font-size: 14px;
-    transition: color 0.3s;
-  }
-  
-  .footer-column ul li a:hover {
-    color: #db8534;
-  }
-  
-  .footer-column p {
-    font-size: 14px;
-    color: #ecf0f1;
-  }
-  
-  .social-links {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .social-links .social-icon {
-    text-decoration: none;
-    color: white;
-    background-color: #474747;
-    padding: 10px 20px;
-    margin-bottom: 10px;
-    text-align: center;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: background-color 0.3s;
-  }
-  
-  .social-links .social-icon:hover {
-    background-color: #cecece;
-  }
-  
-  .footer-bottom {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
-    color: #bdc3c7;
-  }
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
 
-  @media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        align-items: center;
-    }
-  
-    .navbar a {
-        margin: 10px 0;
-    }
-  
-    .footer-container {
-        flex-direction: column;
-        align-items: center;
-    }
-  
-    .footer-column {
-        width: 100%;
-        text-align: center;
-    }
-  
-    .logo {
-        height: 50px;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .navbar a {
-        font-size: 14px;
-    }
-  
-    iframe {
-        height: 300px;
-    }
-  
-    .logo {
-        height: 40px;
-    }
-  }
-  
-  .audio-container {
+.audio-player-ui {
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-direction: column; /* Agar konten vertikal diatur */
-    width: 35%;
-    margin: auto; /* Untuk memusatkan kontainer secara horizontal */
-    margin-top: 5%;
-    text-align: center; /* Untuk menyelaraskan teks di dalam kontainer */
-    min-height: fit-content; /* Agar kontainer memenuhi tinggi layar */
-    background-color: #dadada;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    transition: background-color 0.3s;
 }
 
-#albumImage {
-    width: 250px;
-    height: 250px;
+.audio-player-ui:hover {
+    background-color: #e9ecef;
+}
+
+.audio-artwork {
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    transition: transform 0.5s linear;
+    object-fit: cover;
+    margin-right: 1.5rem;
+    transition: transform 0.8s linear;
 }
 
-.rotating {
-    animation: rotate 5s linear infinite;
+.audio-artwork.rotating {
+    animation: rotate 4s linear infinite;
+}
+
+.audio-info {
+    flex-grow: 1;
+}
+
+.audio-title {
+    margin-bottom: 0.25rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.audio-artist {
+    margin-bottom: 0;
+    color: #6c757d;
+}
+
+.transcript-item {
+    margin-top: 1.5rem;
+    padding-left: 1.5rem;
+    border-left: 3px solid #D9534F;
+}
+
+.transcript-item p {
+    margin-bottom: 0.5rem;
+}
+
+/* Video Section */
+.video-wrapper {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Responsiveness */
-
-/* Untuk layar tablet (max-width: 768px) */
-@media (max-width: 768px) {
-    .audio-container {
-        width: 70%; /* Lebar kontainer diperbesar untuk memanfaatkan layar */
-        padding: 15px; /* Mengurangi padding agar tetap proporsional */
-        margin-top: 8%;
-    }
-
-    #albumImage {
-        width: 200px;
-        height: 200px; /* Ukuran gambar diperkecil untuk layar tablet */
-    }
-}
-
-/* Untuk layar ponsel (max-width: 480px) */
-@media (max-width: 480px) {
-    .audio-container {
-        width: 90%; /* Memenuhi hampir seluruh layar */
-        padding: 10px; /* Mengurangi padding lebih lanjut */
-        margin-top: 10%; /* Memberikan lebih banyak ruang di atas */
-    }
-
-    #albumImage {
-        width: 150px;
-        height: 150px; /* Ukuran gambar lebih kecil untuk ponsel */
-    }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
