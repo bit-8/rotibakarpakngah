@@ -38,18 +38,19 @@ $products_result = $conn->query("SELECT * FROM products ORDER BY created_at DESC
         }
     </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header class="shadow-sm">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand" href="index.php">
-                    <img src="img/logo.png" alt="Logo" style="height: 50px;">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" href="index.php"><img src="img/logo.png" alt="Logo" style="height: 50px;"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="cart.php">
+                    <i class="fas fa-shopping-cart"></i> Cart <span class="badge bg-primary" id="cart-count">0</span>
+                    </a></li>
                         <li class="nav-item"><a class="nav-link" href="foto.php">Gallery</a></li>
                         <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="lainnya.php">More</a></li>
@@ -63,97 +64,57 @@ $products_result = $conn->query("SELECT * FROM products ORDER BY created_at DESC
                             <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
                             <li class="nav-item"><a class="nav-link" href="signup.php">Sign Up</a></li>
                         <?php endif; ?>
-                        <li class="nav-item"><a class="btn btn-primary ms-lg-3" href="pemesan.php">Order Now</a></li>
+                        <li class="nav-item"><a class="btn btn-primary ms-lg-3 active" href="pemesan.php" aria-current="page">Order Now</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
 
-    <main class="container my-5">
+    <main class="container my-5 flex-grow-1">
         <div class="text-center mb-5">
-            <h1 class="form-title">Our Products</h1>
-            <p class="form-subtitle text-muted">Choose your favorite Roti Bakar.</p>
+            <h2 class="section-title">Our Products</h2>
+            <p class="text-muted">Choose your favorite Roti Bakar.</p>
         </div>
         
-        <div class="row">
+        <div class="row gy-4">
             <?php if ($products_result && $products_result->num_rows > 0): ?>
                 <?php while($product = $products_result->fetch_assoc()): ?>
-                <div class="col-md-4 mb-4">
-                    <div class="card product-card h-100">
-                        <img src="img/<?php echo htmlspecialchars($product['image']); ?>" class="card-img-top product-img" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="img/<?php echo htmlspecialchars($product['image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($product['name']); ?>" style="height: 220px; object-fit: cover;">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title"><?php echo htmlspecialchars($product['name']); ?></h5>
-                            <p class="card-text flex-grow-1"><?php echo htmlspecialchars($product['description']); ?></p>
-                            <p class="card-text product-price">Rp <?php echo number_format($product['price'], 2, ',', '.'); ?></p>
-                            <a href="https://wa.me/62895334372186?text=Saya%20tertarik%20untuk%20memesan%20<?php echo urlencode($product['name']); ?>" class="btn btn-primary mt-auto">Order via WhatsApp</a>
+                            <p class="card-text text-muted flex-grow-1"><?php echo htmlspecialchars($product['description']); ?></p>
+                            <p class="h5 text-primary fw-bold">Rp <?php echo number_format($product['price'], 0, ',', '.'); ?></p>
+                            <form class="add-to-cart-form mt-3">
+                                <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+                                <div class="input-group">
+                                    <input type="number" class="form-control" name="quantity" value="1" min="1" aria-label="Quantity">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-cart-plus me-2"></i>Add
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
                 <?php endwhile; ?>
             <?php else: ?>
-                <div class="col">
-                    <p class="text-center">No products available at the moment. Please check back later.</p>
+                <div class="col-12">
+                    <p class="text-center fs-5 text-muted">No products available at the moment. Please check back later.</p>
                 </div>
             <?php endif; ?>
         </div>
     </main>
 
-    <!-- WhatsApp Chat -->
-    <div class="whatsapp-fab" id="whatsappCircle">
-        <i class="fab fa-whatsapp"></i>
-    </div>
-    <div class="whatsapp-chat-box" id="profileBox">
-        <div class="chat-header">
-            <img src="img/lutfi.jpg" alt="Profile" class="chat-avatar">
-            <div class="chat-info">
-                <h6 class="chat-name">Lutfi Ibnurahim</h6>
-                <p class="chat-status">Online</p>
-            </div>
-        </div>
-        <div class="chat-body">
-            <p>Ada yang bisa kami bantu? Jangan ragu untuk bertanya!</p>
-        </div>
-        <a href="https://wa.me/62895334372186" target="_blank" class="chat-button">
-            Chat Sekarang
-        </a>
-    </div>
-
-    <footer class="bg-dark text-white mt-5 p-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <h4>Roti Bakar Pak Ngah</h4>
-                    <p class="text-white-50">Menjaga tradisi rasa sejak 1995.</p>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <h4>Navigasi</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="foto.php" class="text-white-50 text-decoration-none">Gallery</a></li>
-                        <li><a href="about.php" class="text-white-50 text-decoration-none">About</a></li>
-                        <li><a href="lainnya.php" class="text-white-50 text-decoration-none">More</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <h4>Hubungi Kami</h4>
-                    <a href="https://www.instagram.com/natvhan__?igsh=bml6eGp0OWh6Z3N5" target="_blank" class="text-white-50 text-decoration-none me-3">Instagram</a>
-                    <a href="https://www.facebook.com/profile.php?id=61552028236238&mibextid=ZbWKwL" target="_blank" class="text-white-50 text-decoration-none me-3">Facebook</a>
-                    <a href="mailto:231220024@unumuhpnk.ac.id" class="text-white-50 text-decoration-none">Email</a>
-                </div>
-            </div>
-            <div class="text-center text-white-50 pt-3 border-top border-secondary">
-                <p>&copy; 2025 Denathan & Lutfi Ibnurahim. All rights reserved.</p>
-            </div>
+    <footer class="bg-dark text-white mt-auto p-4">
+        <div class="container text-center">
+            <p>&copy; 2025 Denathan & Lutfi Ibnurahim. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script>
-        const whatsappCircle = document.getElementById('whatsappCircle');
-        const profileBox = document.getElementById('profileBox');
-        whatsappCircle.addEventListener('click', function () {
-            profileBox.classList.toggle('active');
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="script.js"></script>
 </body>
 </html>
