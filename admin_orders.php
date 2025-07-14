@@ -8,8 +8,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 
-// Fetch all orders
-$orders_result = $conn->query("SELECT * FROM orders ORDER BY created_at DESC");
+// Fetch all orders, sorted by customer name then by date
+$orders_result = $conn->query("SELECT * FROM orders ORDER BY customer_name, created_at DESC");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,8 +87,21 @@ $orders_result = $conn->query("SELECT * FROM orders ORDER BY created_at DESC");
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if ($orders_result && $orders_result->num_rows > 0): ?>
-                            <?php while($order = $orders_result->fetch_assoc()): ?>
+                        <?php 
+                        $current_customer = null;
+                        if ($orders_result && $orders_result->num_rows > 0):
+                            while($order = $orders_result->fetch_assoc()):
+                                if ($current_customer !== $order['customer_name']):
+                                    $current_customer = $order['customer_name'];
+                        ?>
+                                    <tr class="table-group-divider">
+                                        <td colspan="7" class="bg-light fw-bold">
+                                            Customer: <?php echo htmlspecialchars($current_customer); ?>
+                                        </td>
+                                    </tr>
+                        <?php 
+                                endif;
+                        ?>
                                 <tr>
                                     <td><input type="checkbox" name="order_ids[]" value="<?php echo $order['id']; ?>" class="order-checkbox"></td>
                                     <td><?php echo $order['id']; ?></td>
