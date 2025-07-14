@@ -75,7 +75,7 @@ $products_result = $conn->query("SELECT * FROM products ORDER BY created_at DESC
     <main class="container my-5 flex-grow-1">
         <div class="text-center mb-5">
             <h2 class="section-title">Our Products</h2>
-            <p class="text-muted">Choose your favorite Roti Bakar.</p>
+            <p class="text-muted">Choose your favorites.</p>
         </div>
         
         <div class="row gy-4">
