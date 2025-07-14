@@ -19,6 +19,35 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     border-color: #AC2925;
 }
 
+/* Product Card */
+.product-card {
+    transition: transform .2s, box-shadow .2s;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.product-img {
+    height: 220px;
+    object-fit: cover;
+}
+
+@media (max-width: 576px) {
+    .product-img {
+        height: 180px;
+    }
+}
+
+.product-price {
+    font-weight: bold;
+    color: #007bff;
+}
+
 /* Order Form */
 .order-form-container {
     background-color: #FFFFFF;

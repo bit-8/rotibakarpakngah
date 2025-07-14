@@ -20,7 +20,10 @@ $total_price = 0;
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <a class="navbar-brand" href="index.php"><img src="img/logo.png" alt="Logo" style="height: 50px;"></a>
-                <div class="collapse navbar-collapse">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="pemesan.php">Products</a></li>
                         <li class="nav-item"><a class="nav-link active" href="cart.php">
@@ -74,22 +77,22 @@ $total_price = 0;
                         </tbody>
                     </table>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-5 col-lg-4">
+                <div class="row justify-content-center mt-4">
+                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                         <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h4 class="card-title">Cart Summary</h4>
+                            <div class="card-body p-4">
+                                <h4 class="card-title text-center">Cart Summary</h4>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item d-flex justify-content-between">
+                                    <li class="list-group-item d-flex justify-content-between px-0">
                                         <span>Subtotal</span>
                                         <strong>Rp <?php echo number_format($total_price, 0, ',', '.'); ?></strong>
                                     </li>
                                 </ul>
-                                <hr>
+                                <hr class="my-4">
                                 <form action="checkout_handler.php" method="POST">
-                                    <div class="payment-methods mt-3">
-                                        <h5 class="text-center">Payment Method</h5>
-                                        <div class="d-grid gap-2">
+                                    <div class="payment-methods">
+                                        <h5 class="text-center mb-3">Payment Method</h5>
+                                        <div class="d-grid gap-3">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="payment_method" id="qris" value="qris" required>
                                                 <label class="form-check-label" for="qris">QRIS</label>
@@ -122,10 +125,10 @@ $total_price = 0;
         ?>
             <?php if ($recent_orders->num_rows > 0): ?>
             <hr class="my-5">
-            <div id="recent-orders" class="mt-5">
+            <div id="recent-orders" class="mt-5 bg-white p-3 p-md-4 rounded shadow-sm">
                 <h2 class="text-center mb-4">My Recent Orders</h2>
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover d-none d-md-table">
                         <thead>
                             <tr>
                                 <th>Date</th>
@@ -170,6 +173,53 @@ $total_price = 0;
                         </tbody>
                     </table>
                 </div>
+
+                <div class="d-md-none">
+                    <?php
+                    // Reset pointer of result set to re-iterate for mobile view
+                    $recent_orders->data_seek(0);
+                    while($order = $recent_orders->fetch_assoc()):
+                    ?>
+                    <div class="card order-card">
+                        <div class="card-header">
+                            Order on <?php echo date("d M Y", strtotime($order['created_at'])); ?>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6"><strong>Total:</strong></div>
+                                <div class="col-6">Rp <?php echo number_format($order['total_price'], 0, ',', '.'); ?></div>
+                                <div class="col-6"><strong>Payment:</strong></div>
+                                <div class="col-6"><?php echo htmlspecialchars(ucfirst($order['payment_method'])); ?></div>
+                                <div class="col-6"><strong>Status:</strong></div>
+                                <div class="col-6">
+                                    <span class="badge <?php echo $order['payment_status'] == 'paid' ? 'bg-success' : ($order['payment_status'] == 'failed' ? 'bg-danger' : 'bg-warning'); ?>">
+                                        <?php echo htmlspecialchars(ucfirst($order['payment_status'])); ?>
+                                    </span>
+                                </div>
+                                <div class="col-6"><strong>Order:</strong></div>
+                                <div class="col-6">
+                                    <span class="badge bg-info">
+                                        <?php echo htmlspecialchars(ucfirst($order['order_status'])); ?>
+                                    </span>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <?php if ($order['payment_status'] == 'pending'): ?>
+                                    <a href="payment.php?order_id=<?php echo $order['id']; ?>" class="btn btn-primary btn-sm">Pay Now</a>
+                                    <a href="cancel_order.php?id=<?php echo $order['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to cancel this order?');">
+                                        Cancel
+                                    </a>
+                                <?php elseif ($order['payment_status'] == 'paid'): ?>
+                                    <a href="payment.php?order_id=<?php echo $order['id']; ?>" class="btn btn-info btn-sm">View Payment</a>
+                                <?php else: ?>
+                                    <button class="btn btn-danger btn-sm" disabled>Failed</button>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endwhile; ?>
+                </div>
                 <div class="text-center mt-3">
                     <a href="my_orders.php" class="btn btn-outline-primary">View All Orders</a>
                 </div>
@@ -184,6 +234,7 @@ $total_price = 0;
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="script.js"></script>
 </body>

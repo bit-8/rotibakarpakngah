@@ -81,9 +81,9 @@ $products_result = $conn->query("SELECT * FROM products ORDER BY created_at DESC
         <div class="row gy-4">
             <?php if ($products_result && $products_result->num_rows > 0): ?>
                 <?php while($product = $products_result->fetch_assoc()): ?>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 shadow-sm border-0">
-                        <img src="img/<?php echo htmlspecialchars($product['image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($product['name']); ?>" style="height: 220px; object-fit: cover;">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="card product-card h-100 shadow-sm border-0">
+                        <img src="img/<?php echo htmlspecialchars($product['image']); ?>" class="card-img-top product-img" alt="<?php echo htmlspecialchars($product['name']); ?>">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title"><?php echo htmlspecialchars($product['name']); ?></h5>
                             <p class="card-text text-muted flex-grow-1"><?php echo htmlspecialchars($product['description']); ?></p>
@@ -121,6 +121,7 @@ $products_result = $conn->query("SELECT * FROM products ORDER BY created_at DESC
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="script.js"></script>
 </body>

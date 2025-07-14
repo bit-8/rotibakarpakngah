@@ -1,88 +1,33 @@
-/* General styles */
+/* General Styles */
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
-    margin: 0;
-    line-height: 1.6;
+    font-family: 'Lato', sans-serif;
+    background-color: #f8f9fa;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+.navbar-brand img {
+    height: 50px;
 }
 
-/* Header and Navigation */
-header {
-    background: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+/* Custom Card for Recent Orders */
+.order-card {
+    display: none; /* Hidden by default */
 }
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-    text-decoration: none;
-}
-
-.nav-links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 2rem;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #555;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-    color: #007bff;
-}
-
-/* Main content */
-main {
-    padding: 4rem 0;
-}
-
-.section {
-    padding: 4rem 0;
-}
-
-.section h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-}
-
-/* Footer */
-footer {
-    background: #333;
-    color: #fff;
-    text-align: center;
-    padding: 2rem 0;
-    margin-top: 4rem;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none; /* Or handle with a mobile menu icon */
+@media (max-width: 767.98px) {
+    .table-responsive {
+        display: none; /* Hide table on small screens */
+    }
+    .order-card {
+        display: block; /* Show cards on small screens */
+        margin-bottom: 1rem;
+        border: 1px solid #dee2e6;
+        border-radius: .25rem;
+    }
+    .order-card .card-header {
+        background-color: #f8f9fa;
+        font-weight: bold;
+    }
+    .order-card .card-body .row > div {
+        margin-bottom: .5rem;
     }
 }
