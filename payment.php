@@ -51,15 +51,15 @@ $cart_details = json_decode($order['cart_details'], true);
                                 <div class="text-center">
                                     <h5>Scan QRIS Code</h5>
                                     <p>Use your mobile banking or e-wallet app to scan the code below.</p>
-                                    <img src="img/hujan.png" alt="QRIS Code Placeholder" class="img-fluid" style="max-width: 250px;">
+                                    <img src="img/qris.jpeg" alt="QRIS" class="img-fluid" style="max-width: 250px;">
                                 </div>
                             <?php elseif ($order['payment_method'] === 'bank_transfer'): ?>
                                 <div>
                                     <h5 class="text-center">Bank Transfer</h5>
                                     <p class="text-center">Transfer to one of the following accounts:</p>
                                     <ul class="list-group">
-                                        <li class="list-group-item"><strong>BCA:</strong> 123-456-7890 (a/n Roti Bakar Pak Ngah)</li>
-                                        <li class="list-group-item"><strong>Mandiri:</strong> 098-765-4321 (a/n Roti Bakar Pak Ngah)</li>
+                                        <li class="list-group-item"><strong>BCA:</strong> 312-111-921 (a/n Roti Bakar Pak Ngah)</li>
+                                        <li class="list-group-item"><strong>Mandiri:</strong> 021-421-012 (a/n Roti Bakar Pak Ngah)</li>
                                         <li class="list-group-item"><strong>BNI:</strong> 112-233-4455 (a/n Roti Bakar Pak Ngah)</li>
                                     </ul>
                                 </div>

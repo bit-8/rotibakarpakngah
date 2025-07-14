@@ -94,13 +94,13 @@
         document.addEventListener("DOMContentLoaded", function() {
             const galleryItems = [
                 { img: 'img/founder.jpeg', title: 'Sang Perintis', desc: 'Pak Ngah, pendiri usaha.' },
-                { img: 'img/R1.jpeg', title: 'Roti Pagi', desc: 'Awal hari yang sempurna.' },
-                { img: 'img/R2.jpeg', title: 'Tumpukan Kebaikan', desc: 'Selalu lebih dari cukup.' },
-                { img: 'img/R3a.jpeg', title: 'Seni Sederhana', desc: 'Dibuat dengan hati.' },
+                { img: 'img/roti_isi_coklat_seres.jpg', title: 'Roti cokelat', desc: 'Awal hari yang sempurna.' },
+                { img: 'img/R2.jpeg', title: 'Roti plain', desc: 'Selalu lebih dari cukup.' },
+                { img: 'img/roti_sosis.jpg', title: 'Roti sosis', desc: 'Dibuat dengan hati.' },
                 { img: 'img/R5.jpeg', title: 'Surga Roti', desc: 'Kelezatan di setiap gigitan.' },
                 { img: 'img/R6.jpeg', title: 'Hangat & Segar', desc: 'Langsung dari panggangan.' },
-                { img: 'img/roti10.jpeg', title: 'Siap Saji', desc: 'Menemani setiap momen.' },
-                { img: 'img/roti13a.jpeg', title: 'Klasik & Abadi', desc: 'Rasa yang tak lekang oleh waktu.' }
+                { img: 'img/roti_abon.jpg', title: 'Roti abon', desc: 'Menemani setiap momen.' },
+                { img: 'img/roti_srikaya.jpg', title: 'Roti srikaya', desc: 'Rasa yang tak lekang oleh waktu.' }
             ];
 
             const galleryGrid = document.getElementById('gallery-grid');

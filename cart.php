@@ -74,7 +74,7 @@ $total_price = 0;
                         </tbody>
                     </table>
                 </div>
-                <div class="row justify-content-end">
+                <div class="row justify-content-center">
                     <div class="col-md-5 col-lg-4">
                         <div class="card shadow-sm">
                             <div class="card-body">
