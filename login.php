@@ -2,11 +2,11 @@
 session_start();
 include 'db_connect.php';
 
+$error_message = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Prepare and bind
     $stmt = $conn->prepare("SELECT id, username, password, role FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -23,114 +23,71 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($role == 'admin') {
                 header("Location: admin_dashboard.php");
             } else {
-                header("Location: index.php"); // Redirect regular users to homepage or a user dashboard
+                header("Location: index.php");
             }
             exit();
         } else {
-            $_SESSION['error'] = "Invalid username or password.";
-            header("Location: login.php");
-            exit();
+            $error_message = "Invalid username or password.";
         }
     } else {
-        $_SESSION['error'] = "Invalid username or password.";
-        header("Location: login.php");
-        exit();
+        $error_message = "Invalid username or password.";
     }
-
     $stmt->close();
     $conn->close();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login - Roti Bakar Pak Ngah</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-        .login-container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            text-align: center;
-        }
-        .login-container h2 {
-            margin-bottom: 20px;
-            color: #333;
-        }
-        .login-container input[type="text"],
-        .login-container input[type="password"] {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .login-container button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-        }
-        .login-container button:hover {
-            background-color: #0056b3;
-        }
-        .login-container .message {
-            margin-top: 15px;
-            color: green;
-        }
-        .login-container .error {
-            margin-top: 15px;
-            color: red;
-        }
-        .login-container p {
-            margin-top: 20px;
-        }
-        .login-container a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .login-container a:hover {
-            text-decoration: underline;
-        }
-    </style>
 </head>
-<body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <?php
-        if (isset($_SESSION['message'])) {
-            echo '<p class="message">' . $_SESSION['message'] . '</p>';
-            unset($_SESSION['message']);
-        }
-        if (isset($_SESSION['error'])) {
-            echo '<p class="error">' . $_SESSION['error'] . '</p>';
-            unset($_SESSION['error']);
-        }
-        ?>
-        <form action="login.php" method="post">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
-        <p>Don't have an account? <a href="signup.php">Sign up here</a></p>
+<body class="bg-light d-flex align-items-center justify-content-center min-vh-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4 p-md-5">
+                        <div class="text-center mb-4">
+                            <a href="index.php">
+                                <img src="img/logo.png" alt="Logo" style="height: 70px;">
+                            </a>
+                            <h3 class="mt-3">Welcome Back!</h3>
+                            <p class="text-muted">Login to continue.</p>
+                        </div>
+
+                        <?php if (!empty($error_message)): ?>
+                            <div class="alert alert-danger"><?php echo $error_message; ?></div>
+                        <?php endif; ?>
+                        <?php if (isset($_SESSION['message'])): ?>
+                            <div class="alert alert-success"><?php echo $_SESSION['message']; unset($_SESSION['message']); ?></div>
+                        <?php endif; ?>
+
+                        <form action="login.php" method="post">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </div>
+                        </form>
+                        <div class="text-center mt-4">
+                            <p class="text-muted">Don't have an account? <a href="signup.php">Sign up here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
