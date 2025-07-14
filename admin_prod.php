@@ -2,20 +2,54 @@
 session_start();
 include 'db_connect.php';
 
-// Redirect if not logged in as admin
-// if (!isset($_SESSION['isAdmin']) || !$_SESSION['isAdmin']) {
-//     header("Location: login.php");
-//     exit();
-// }
+// Admin access check
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+    header("Location: login.php");
+    exit();
+}
 
 $message = '';
+$edit_product = null;
+$is_edit_mode = false;
+
+// Handle Edit Request (to populate the form)
+if (isset($_GET['edit'])) {
+    $id_to_edit = (int)$_GET['edit'];
+    $stmt = $conn->prepare("SELECT * FROM products WHERE id = ?");
+    $stmt->bind_param("i", $id_to_edit);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $edit_product = $result->fetch_assoc();
+        $is_edit_mode = true;
+    }
+    $stmt->close();
+}
+
+// Handle Update Product
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_product'])) {
+    $id = (int)$_POST['product_id'];
+    $name = $_POST['name'];
+    $description = $_POST['description'];
+    $price = $_POST['price'];
+    // Image is not updated in this form to keep it simple
+    
+    $stmt = $conn->prepare("UPDATE products SET name = ?, description = ?, price = ? WHERE id = ?");
+    $stmt->bind_param("ssdi", $name, $description, $price, $id);
+    if ($stmt->execute()) {
+        $message = "Product updated successfully.";
+    } else {
+        $message = "Error updating product: " . $stmt->error;
+    }
+    $stmt->close();
+}
 
 // Handle Add Product
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_product'])) {
     $name = $_POST['name'];
     $description = $_POST['description'];
     $price = $_POST['price'];
-    $image = $_POST['image']; // Image is now from the select dropdown
+    $image = $_POST['image'];
 
     if (!empty($name) && !empty($description) && !empty($price) && !empty($image)) {
         $stmt = $conn->prepare("INSERT INTO products (name, description, price, image) VALUES (?, ?, ?, ?)");
@@ -33,21 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_product'])) {
 
 // Handle Delete Product
 if (isset($_GET['delete'])) {
-    $id = $_GET['delete'];
-    
-    // We don't delete the image file from img/ anymore since they are reused
-    // // First, get the image name to delete the file
-    // $stmt = $conn->prepare("SELECT image FROM products WHERE id = ?");
-    // $stmt->bind_param("i", $id);
-    // $stmt->execute();
-    // $stmt->bind_result($image_to_delete);
-    // $stmt->fetch();
-    // $stmt->close();
-
-    // if ($image_to_delete && file_exists('img/' . $image_to_delete)) {
-    //     unlink('img/' . $image_to_delete);
-    // }
-
+    $id = (int)$_GET['delete'];
     $stmt = $conn->prepare("DELETE FROM products WHERE id = ?");
     $stmt->bind_param("i", $id);
     if ($stmt->execute()) {
@@ -58,15 +78,11 @@ if (isset($_GET['delete'])) {
     $stmt->close();
 }
 
-// Fetch all products
+// Fetch all products and images
 $products = $conn->query("SELECT * FROM products ORDER BY created_at DESC");
-
-// Fetch all images from the img directory
 $image_dir = 'img/';
 $images = array_diff(scandir($image_dir), array('..', '.'));
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,24 +102,33 @@ $images = array_diff(scandir($image_dir), array('..', '.'));
     </header>
 
     <main class="admin-container">
-        <h2>Add New Product</h2>
+        <h2><?php echo $is_edit_mode ? 'Edit Product' : 'Add New Product'; ?></h2>
         <?php if ($message): ?>
-            <p class="message"><?php echo $message; ?></p>
+            <div class="alert alert-info"><?php echo $message; ?></div>
         <?php endif; ?>
+
         <form action="admin_prod.php" method="post">
-            <input type="hidden" name="add_product" value="1">
+            <?php if ($is_edit_mode): ?>
+                <input type="hidden" name="update_product" value="1">
+                <input type="hidden" name="product_id" value="<?php echo $edit_product['id']; ?>">
+            <?php else: ?>
+                <input type="hidden" name="add_product" value="1">
+            <?php endif; ?>
+
             <div class="form-group">
                 <label for="name">Product Name:</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name" value="<?php echo $is_edit_mode ? htmlspecialchars($edit_product['name']) : ''; ?>" required>
             </div>
             <div class="form-group">
                 <label for="description">Description:</label>
-                <textarea id="description" name="description" rows="4" required></textarea>
+                <textarea id="description" name="description" rows="4" required><?php echo $is_edit_mode ? htmlspecialchars($edit_product['description']) : ''; ?></textarea>
             </div>
             <div class="form-group">
                 <label for="price">Price:</label>
-                <input type="number" id="price" name="price" step="0.01" required>
+                <input type="number" id="price" name="price" step="0.01" value="<?php echo $is_edit_mode ? htmlspecialchars($edit_product['price']) : ''; ?>" required>
             </div>
+            
+            <?php if (!$is_edit_mode): ?>
             <div class="form-group">
                 <label for="image">Product Image:</label>
                 <select id="image" name="image" required>
@@ -113,7 +138,12 @@ $images = array_diff(scandir($image_dir), array('..', '.'));
                     <?php endforeach; ?>
                 </select>
             </div>
-            <button type="submit">Add Product</button>
+            <?php endif; ?>
+
+            <button type="submit"><?php echo $is_edit_mode ? 'Update Product' : 'Add Product'; ?></button>
+            <?php if ($is_edit_mode): ?>
+                <a href="admin_prod.php" class="button-link">Cancel Edit</a>
+            <?php endif; ?>
         </form>
 
         <hr>
@@ -138,8 +168,8 @@ $images = array_diff(scandir($image_dir), array('..', '.'));
                             <td><?php echo htmlspecialchars($row['description']); ?></td>
                             <td>$<?php echo htmlspecialchars($row['price']); ?></td>
                             <td>
+                                <a href="admin_prod.php?edit=<?php echo $row['id']; ?>">Edit</a> |
                                 <a href="admin_prod.php?delete=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>
-                                <!-- Add Edit link here later -->
                             </td>
                         </tr>
                     <?php endwhile; ?>
@@ -151,6 +181,5 @@ $images = array_diff(scandir($image_dir), array('..', '.'));
             </tbody>
         </table>
     </main>
-
 </body>
 </html>
