@@ -159,8 +159,10 @@ $total_price = 0;
                                             <a href="cancel_order.php?id=<?php echo $order['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to cancel this order?');">
                                                 Cancel
                                             </a>
-                                        <?php else: ?>
+                                        <?php elseif ($order['payment_status'] == 'paid'): ?>
                                             <a href="payment.php?order_id=<?php echo $order['id']; ?>" class="btn btn-info btn-sm">View Payment</a>
+                                        <?php else: ?>
+                                            <button class="btn btn-danger btn-sm" disabled>Failed</button>
                                         <?php endif; ?>
                                     </td>
                                 </tr>

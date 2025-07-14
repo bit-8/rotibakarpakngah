@@ -18,8 +18,8 @@ if (isset($_GET['id'])) {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        // Update the order status to 'cancelled'
-        $update_stmt = $conn->prepare("UPDATE orders SET order_status = 'cancelled' WHERE id = ?");
+        // Update the order status to 'cancelled' and payment status to 'failed'
+        $update_stmt = $conn->prepare("UPDATE orders SET order_status = 'cancelled', payment_status = 'failed' WHERE id = ?");
         $update_stmt->bind_param("i", $order_id);
         if ($update_stmt->execute()) {
             $_SESSION['message'] = "Order #$order_id has been cancelled.";
