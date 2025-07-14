@@ -130,8 +130,10 @@ $total_price = 0;
                             <tr>
                                 <th>Date</th>
                                 <th>Total</th>
+                                <th>Payment Method</th>
                                 <th>Payment Status</th>
                                 <th>Order Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -139,6 +141,7 @@ $total_price = 0;
                                 <tr>
                                     <td><?php echo date("d M Y", strtotime($order['created_at'])); ?></td>
                                     <td>Rp <?php echo number_format($order['total_price'], 0, ',', '.'); ?></td>
+                                    <td><?php echo htmlspecialchars(ucfirst($order['payment_method'])); ?></td>
                                     <td>
                                         <span class="badge 
                                             <?php echo $order['payment_status'] == 'paid' ? 'bg-success' : ($order['payment_status'] == 'failed' ? 'bg-danger' : 'bg-warning'); ?>">
@@ -149,6 +152,16 @@ $total_price = 0;
                                         <span class="badge bg-info">
                                             <?php echo htmlspecialchars(ucfirst($order['order_status'])); ?>
                                         </span>
+                                    </td>
+                                    <td>
+                                        <?php if ($order['payment_status'] == 'pending'): ?>
+                                            <a href="payment.php?order_id=<?php echo $order['id']; ?>" class="btn btn-primary btn-sm">Pay Now</a>
+                                            <a href="cancel_order.php?id=<?php echo $order['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to cancel this order?');">
+                                                Cancel
+                                            </a>
+                                        <?php else: ?>
+                                            <a href="payment.php?order_id=<?php echo $order['id']; ?>" class="btn btn-info btn-sm">View Payment</a>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>

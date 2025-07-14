@@ -88,12 +88,51 @@ $cart_details = json_decode($order['cart_details'], true);
 
                         <div class="text-center mt-4">
                             <p>After payment, your order status will be updated by our team.</p>
-                            <a href="index.php" class="btn btn-secondary">Back to Home</a>
+                            <a href="cart.php" class="btn btn-secondary">Back to Cart</a>
+                            <?php if ($order['payment_status'] == 'pending'): ?>
+                                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#changePaymentModal">
+                                    Change Payment Method
+                                </button>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Change Payment Method Modal -->
+        <div class="modal fade" id="changePaymentModal" tabindex="-1" aria-labelledby="changePaymentModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="changePaymentModalLabel">Change Payment Method</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="update_payment_method.php" method="POST">
+                            <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
+                            <div class="payment-methods mt-3">
+                                <h5 class="text-center">Select New Payment Method</h5>
+                                <div class="d-grid gap-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="payment_method" id="qris" value="qris" required>
+                                        <label class="form-check-label" for="qris">QRIS</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="payment_method" id="bank_transfer" value="bank_transfer" required>
+                                        <label class="form-check-label" for="bank_transfer">Bank Transfer</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-grid mt-4">
+                                <button type="submit" class="btn btn-primary">Update Payment</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
