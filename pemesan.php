@@ -55,6 +55,7 @@ $products_result = $conn->query("SELECT * FROM products ORDER BY created_at DESC
                         <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="lainnya.php">More</a></li>
                         <?php if (isset($_SESSION['user_id'])): ?>
+                            <li class="nav-item"><a class="nav-link" href="my_orders.php">My Orders</a></li>
                             <?php if ($_SESSION['role'] === 'admin'): ?>
                                 <li class="nav-item"><a class="nav-link" href="admin_dashboard.php">Dashboard</a></li>
                             <?php endif; ?>

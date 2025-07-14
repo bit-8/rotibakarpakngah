@@ -105,6 +105,7 @@ $conn->close();
 
         <div class="dashboard-nav">
             <a href="admin_prod.php">Manage Products</a>
+            <a href="admin_orders.php">View Orders</a>
             <a href="index.php" target="_blank">View Website</a>
         </div>
         

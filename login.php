@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($role == 'admin') {
                 header("Location: admin_dashboard.php");
             } else {
-                header("Location: index.html"); // Redirect regular users to homepage or a user dashboard
+                header("Location: index.php"); // Redirect regular users to homepage or a user dashboard
             }
             exit();
         } else {

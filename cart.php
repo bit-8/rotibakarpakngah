@@ -86,24 +86,81 @@ $total_price = 0;
                                     </li>
                                 </ul>
                                 <hr>
-                                <div class="payment-methods mt-3">
-                                    <h5 class="text-center">Payment Method</h5>
-                                    <p class="text-muted text-center small">This is a placeholder</p>
-                                    <div class="d-grid gap-2">
-                                        <button class="btn btn-outline-primary disabled"><i class="fab fa-cc-visa me-2"></i>Credit Card</button>
-                                        <button class="btn btn-outline-primary disabled"><i class="fas fa-university me-2"></i>Bank Transfer</button>
-                                        <button class="btn btn-outline-primary disabled"><i class="fas fa-money-bill-wave me-2"></i>Cash on Delivery</button>
+                                <form action="checkout_handler.php" method="POST">
+                                    <div class="payment-methods mt-3">
+                                        <h5 class="text-center">Payment Method</h5>
+                                        <div class="d-grid gap-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="payment_method" id="qris" value="qris" required>
+                                                <label class="form-check-label" for="qris">QRIS</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="payment_method" id="bank_transfer" value="bank_transfer" required>
+                                                <label class="form-check-label" for="bank_transfer">Bank Transfer</label>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="d-grid mt-4">
-                                    <button class="btn btn-primary btn-lg">Proceed to Checkout</button>
-                                </div>
+                                    <div class="d-grid mt-4">
+                                        <button type="submit" class="btn btn-primary btn-lg">Proceed to Checkout</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             <?php endif; ?>
         </div>
+
+        <?php
+        // Show recent orders for logged-in users
+        if (isset($_SESSION['user_id'])):
+            $user_id = (int)$_SESSION['user_id'];
+            $stmt = $conn->prepare("SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC LIMIT 5");
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+            $recent_orders = $stmt->get_result();
+        ?>
+            <?php if ($recent_orders->num_rows > 0): ?>
+            <hr class="my-5">
+            <div id="recent-orders" class="mt-5">
+                <h2 class="text-center mb-4">My Recent Orders</h2>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Total</th>
+                                <th>Payment Status</th>
+                                <th>Order Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while($order = $recent_orders->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?php echo date("d M Y", strtotime($order['created_at'])); ?></td>
+                                    <td>Rp <?php echo number_format($order['total_price'], 0, ',', '.'); ?></td>
+                                    <td>
+                                        <span class="badge 
+                                            <?php echo $order['payment_status'] == 'paid' ? 'bg-success' : ($order['payment_status'] == 'failed' ? 'bg-danger' : 'bg-warning'); ?>">
+                                            <?php echo htmlspecialchars(ucfirst($order['payment_status'])); ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-info">
+                                            <?php echo htmlspecialchars(ucfirst($order['order_status'])); ?>
+                                        </span>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center mt-3">
+                    <a href="my_orders.php" class="btn btn-outline-primary">View All Orders</a>
+                </div>
+            </div>
+            <?php endif; ?>
+        <?php endif; ?>
     </main>
 
     <footer class="bg-dark text-white mt-auto p-4">
