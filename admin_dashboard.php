@@ -88,12 +88,25 @@ $conn->close();
         .logout-btn:hover {
             background-color: #c82333;
         }
+        .dashboard-nav {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .dashboard-nav a {
+            margin: 0 15px;
+            font-size: 1.1em;
+        }
     </style>
 </head>
 <body>
     <div class="dashboard-container">
         <h2>Admin Dashboard</h2>
         <p>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</p>
+
+        <div class="dashboard-nav">
+            <a href="admin_prod.php">Manage Products</a>
+            <a href="index.php" target="_blank">View Website</a>
+        </div>
         
         <h3>All Users</h3>
         <?php if (!empty($users)): ?>

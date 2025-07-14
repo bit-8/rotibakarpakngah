@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php 
+session_start(); 
+include 'db_connect.php';
+
+// Fetch all products
+$products_result = $conn->query("SELECT * FROM products ORDER BY created_at DESC");
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -11,6 +17,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="pemesan.css">
+    <style>
+        .product-card {
+            transition: transform .2s;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .product-img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .product-price {
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
 </head>
 <body>
     <header class="shadow-sm">
@@ -45,44 +71,31 @@
     </header>
 
     <main class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="order-form-container">
-                    <div class="text-center mb-5">
-                        <h1 class="form-title">Pesan Roti Bakar Anda</h1>
-                        <p class="form-subtitle text-muted">Isi formulir di bawah ini untuk menikmati kelezatan Roti Bakar Pak Ngah.</p>
+        <div class="text-center mb-5">
+            <h1 class="form-title">Our Products</h1>
+            <p class="form-subtitle text-muted">Choose your favorite Roti Bakar.</p>
+        </div>
+        
+        <div class="row">
+            <?php if ($products_result && $products_result->num_rows > 0): ?>
+                <?php while($product = $products_result->fetch_assoc()): ?>
+                <div class="col-md-4 mb-4">
+                    <div class="card product-card h-100">
+                        <img src="img/<?php echo htmlspecialchars($product['image']); ?>" class="card-img-top product-img" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title"><?php echo htmlspecialchars($product['name']); ?></h5>
+                            <p class="card-text flex-grow-1"><?php echo htmlspecialchars($product['description']); ?></p>
+                            <p class="card-text product-price">Rp <?php echo number_format($product['price'], 2, ',', '.'); ?></p>
+                            <a href="https://wa.me/62895334372186?text=Saya%20tertarik%20untuk%20memesan%20<?php echo urlencode($product['name']); ?>" class="btn btn-primary mt-auto">Order via WhatsApp</a>
+                        </div>
                     </div>
-                    <form id="orderForm">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="namaPemesan" class="form-label">Nama Anda</label>
-                                <input type="text" id="namaPemesan" class="form-control" required placeholder="cth: John Doe">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="jumlahBarang" class="form-label">Jumlah (toples)</label>
-                                <input type="number" id="jumlahBarang" class="form-control" required min="1" placeholder="cth: 2">
-                            </div>
-                        </div>
-                        <div class="row align-items-end">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Harga per Toples</label>
-                                <input type="text" value="Rp 10.000" class="form-control" readonly>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="totalHarga" class="form-label">Total Harga</label>
-                                <input type="text" id="totalHarga" class="form-control" readonly>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <label for="catatan" class="form-label">Catatan Tambahan</label>
-                            <textarea id="catatan" class="form-control" rows="4" placeholder="Ada permintaan khusus? Tulis di sini..."></textarea>
-                        </div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-lg">Kirim Pesanan</button>
-                        </div>
-                    </form>
                 </div>
-            </div>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <div class="col">
+                    <p class="text-center">No products available at the moment. Please check back later.</p>
+                </div>
+            <?php endif; ?>
         </div>
     </main>
 
@@ -135,28 +148,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        document.getElementById('jumlahBarang').addEventListener('input', function () {
-            const hargaPerBarang = 10000; // Updated price
-            const jumlah = this.value;
-            const total = hargaPerBarang * jumlah;
-            document.getElementById('totalHarga').value = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(total);
-        });
-
-        document.getElementById('orderForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'success',
-                title: 'Pemesanan Terkirim!',
-                text: 'Terima kasih, pesanan Anda sedang kami proses.',
-                confirmButtonText: 'Luar Biasa!',
-                customClass: {
-                    confirmButton: 'btn btn-primary-swal'
-                }
-            });
-        });
-
         const whatsappCircle = document.getElementById('whatsappCircle');
         const profileBox = document.getElementById('profileBox');
         whatsappCircle.addEventListener('click', function () {
