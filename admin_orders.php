@@ -46,81 +46,75 @@ $orders_result = $conn->query("SELECT * FROM orders ORDER BY created_at DESC");
             </div>
         <?php endif; ?>
 
-        <div class="table-responsive">
-            <table class="table table-striped table-hover">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Total Price</th>
-                        <th>Payment Method</th>
-                        <th>Payment Status</th>
-                        <th>Order Status</th>
-                        <th>Date</th>
-                        <th>Details</th>
-                        <th>Update Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if ($orders_result && $orders_result->num_rows > 0): ?>
-                        <?php while($order = $orders_result->fetch_assoc()): ?>
-                            <tr>
-                                <td><?php echo $order['id']; ?></td>
-                                <td><?php echo htmlspecialchars($order['customer_name']); ?></td>
-                                <td>Rp <?php echo number_format($order['total_price'], 0, ',', '.'); ?></td>
-                                <td><?php echo htmlspecialchars($order['payment_method']); ?></td>
-                                <td><span class="badge bg-warning"><?php echo htmlspecialchars($order['payment_status']); ?></span></td>
-                                <td><span class="badge bg-info"><?php echo htmlspecialchars($order['order_status']); ?></span></td>
-                                <td><?php echo date("d M Y, H:i", strtotime($order['created_at'])); ?></td>
-                                <td><button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#orderModal<?php echo $order['id']; ?>">View</button></td>
-                                <td>
-                                    <form action="update_order_status.php" method="POST" class="d-flex">
-                                        <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
-                                        <select name="payment_status" class="form-select form-select-sm me-2">
-                                            <option value="pending" <?php if($order['payment_status'] == 'pending') echo 'selected'; ?>>Pending</option>
-                                            <option value="paid" <?php if($order['payment_status'] == 'paid') echo 'selected'; ?>>Paid</option>
-                                            <option value="failed" <?php if($order['payment_status'] == 'failed') echo 'selected'; ?>>Failed</option>
-                                        </select>
-                                        <select name="order_status" class="form-select form-select-sm me-2">
-                                            <option value="processing" <?php if($order['order_status'] == 'processing') echo 'selected'; ?>>Processing</option>
-                                            <option value="shipped" <?php if($order['order_status'] == 'shipped') echo 'selected'; ?>>Shipped</option>
-                                            <option value="completed" <?php if($order['order_status'] == 'completed') echo 'selected'; ?>>Completed</option>
-                                            <option value="cancelled" <?php if($order['order_status'] == 'cancelled') echo 'selected'; ?>>Cancelled</option>
-                                        </select>
-                                        <button type="submit" class="btn btn-sm btn-success">Save</button>
-                                    </form>
-                                </td>
-                            </tr>
+        <form action="update_order_status.php" method="POST">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body d-flex flex-wrap justify-content-end align-items-center">
+                    <span class="me-3">For selected orders:</span>
+                    <div class="me-3">
+                        <label for="bulk_payment_status" class="visually-hidden">Payment Status</label>
+                        <select name="payment_status" id="bulk_payment_status" class="form-select form-select-sm">
+                            <option value="">-- Payment Status --</option>
+                            <option value="pending">Pending</option>
+                            <option value="paid">Paid</option>
+                            <option value="failed">Failed</option>
+                        </select>
+                    </div>
+                    <div class="me-3">
+                        <label for="bulk_order_status" class="visually-hidden">Order Status</label>
+                        <select name="order_status" id="bulk_order_status" class="form-select form-select-sm">
+                            <option value="">-- Order Status --</option>
+                            <option value="processing">Processing</option>
+                            <option value="shipped">Shipped</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm">Update Selected</button>
+                </div>
+            </div>
 
-                            <!-- Modal for order details -->
-                            <div class="modal fade" id="orderModal<?php echo $order['id']; ?>" tabindex="-1">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Order Details #<?php echo $order['id']; ?></h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <?php $cart = json_decode($order['cart_details'], true); ?>
-                                            <ul class="list-group">
-                                                <?php foreach($cart as $item): ?>
-                                                    <li class="list-group-item">
-                                                        <?php echo htmlspecialchars($item['name']); ?> (x<?php echo $item['quantity']; ?>)
-                                                    </li>
-                                                <?php endforeach; ?>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endwhile; ?>
-                    <?php else: ?>
-                        <tr><td colspan="9" class="text-center">No orders found.</td></tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th><input type="checkbox" id="select-all"></th>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Total Price</th>
+                            <th>Payment Status</th>
+                            <th>Order Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if ($orders_result && $orders_result->num_rows > 0): ?>
+                            <?php while($order = $orders_result->fetch_assoc()): ?>
+                                <tr>
+                                    <td><input type="checkbox" name="order_ids[]" value="<?php echo $order['id']; ?>" class="order-checkbox"></td>
+                                    <td><?php echo $order['id']; ?></td>
+                                    <td><?php echo htmlspecialchars($order['customer_name']); ?></td>
+                                    <td>Rp <?php echo number_format($order['total_price'], 0, ',', '.'); ?></td>
+                                    <td><span class="badge bg-<?php echo $order['payment_status'] == 'paid' ? 'success' : 'warning'; ?>"><?php echo htmlspecialchars($order['payment_status']); ?></span></td>
+                                    <td><span class="badge bg-info"><?php echo htmlspecialchars($order['order_status']); ?></span></td>
+                                    <td><?php echo date("d M Y, H:i", strtotime($order['created_at'])); ?></td>
+                                </tr>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <tr><td colspan="7" class="text-center">No orders found.</td></tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </form>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('select-all').addEventListener('click', function(event) {
+            const checkboxes = document.querySelectorAll('.order-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = event.target.checked;
+            });
+        });
+    </script>
 </body>
 </html>

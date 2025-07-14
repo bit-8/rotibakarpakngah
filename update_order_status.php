@@ -9,29 +9,58 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $order_id = (int)$_POST['order_id'];
+    $order_ids = isset($_POST['order_ids']) ? (array)$_POST['order_ids'] : [];
     $payment_status = $_POST['payment_status'];
     $order_status = $_POST['order_status'];
 
-    // Validate statuses
-    $allowed_payment_statuses = ['pending', 'paid', 'failed'];
-    $allowed_order_statuses = ['processing', 'shipped', 'completed', 'cancelled'];
-
-    if (in_array($payment_status, $allowed_payment_statuses) && in_array($order_status, $allowed_order_statuses)) {
-        $stmt = $conn->prepare("UPDATE orders SET payment_status = ?, order_status = ? WHERE id = ?");
-        $stmt->bind_param("ssi", $payment_status, $order_status, $order_id);
-        
-        if ($stmt->execute()) {
-            // Success
-            $_SESSION['message'] = "Order #$order_id status updated successfully.";
-        } else {
-            // Failure
-            $_SESSION['message'] = "Error updating order status.";
-        }
-        $stmt->close();
-    } else {
-        $_SESSION['message'] = "Invalid status value.";
+    if (empty($order_ids)) {
+        $_SESSION['message'] = "No orders selected for update.";
+        header("Location: admin_orders.php");
+        exit();
     }
+
+    if (empty($payment_status) && empty($order_status)) {
+        $_SESSION['message'] = "No status selected to update.";
+        header("Location: admin_orders.php");
+        exit();
+    }
+
+    // Build the query dynamically based on which statuses are being updated
+    $query_parts = [];
+    $params = [];
+    $types = "";
+
+    if (!empty($payment_status)) {
+        $query_parts[] = "payment_status = ?";
+        $params[] = $payment_status;
+        $types .= "s";
+    }
+    if (!empty($order_status)) {
+        $query_parts[] = "order_status = ?";
+        $params[] = $order_status;
+        $types .= "s";
+    }
+
+    // Create placeholders for the IN clause
+    $id_placeholders = implode(',', array_fill(0, count($order_ids), '?'));
+    $types .= str_repeat('i', count($order_ids));
+    
+    foreach ($order_ids as $id) {
+        $params[] = (int)$id;
+    }
+
+    $sql = "UPDATE orders SET " . implode(', ', $query_parts) . " WHERE id IN (" . $id_placeholders . ")";
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param($types, ...$params);
+
+    if ($stmt->execute()) {
+        $count = $stmt->affected_rows;
+        $_SESSION['message'] = "$count order(s) updated successfully.";
+    } else {
+        $_SESSION['message'] = "Error updating orders: " . $conn->error;
+    }
+    $stmt->close();
 }
 
 header("Location: admin_orders.php");
