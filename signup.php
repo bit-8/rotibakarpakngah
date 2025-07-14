@@ -103,6 +103,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="signup-container">
         <h2>Sign Up</h2>
         <?php
+        if (isset($_GET['redirect']) && $_GET['redirect'] == 'pemesan') {
+            echo '<p class="message">Please create an account or log in to add items to your cart.</p>';
+        }
         if (isset($_SESSION['message'])) {
             echo '<p class="message">' . $_SESSION['message'] . '</p>';
             unset($_SESSION['message']);

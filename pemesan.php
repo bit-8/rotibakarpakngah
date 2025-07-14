@@ -88,15 +88,21 @@ $products_result = $conn->query("SELECT * FROM products ORDER BY created_at DESC
                             <h5 class="card-title"><?php echo htmlspecialchars($product['name']); ?></h5>
                             <p class="card-text text-muted flex-grow-1"><?php echo htmlspecialchars($product['description']); ?></p>
                             <p class="h5 text-primary fw-bold">Rp <?php echo number_format($product['price'], 0, ',', '.'); ?></p>
-                            <form class="add-to-cart-form mt-3">
-                                <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-                                <div class="input-group">
-                                    <input type="number" class="form-control" name="quantity" value="1" min="1" aria-label="Quantity">
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="fas fa-cart-plus me-2"></i>Add
-                                    </button>
-                                </div>
-                            </form>
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <form class="add-to-cart-form mt-3">
+                                    <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" name="quantity" value="1" min="1" aria-label="Quantity">
+                                        <button class="btn btn-primary" type="submit">
+                                            <i class="fas fa-cart-plus me-2"></i>Add
+                                        </button>
+                                    </div>
+                                </form>
+                            <?php else: ?>
+                                <a href="signup.php?redirect=pemesan" class="btn btn-primary mt-3">
+                                    <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                                </a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
