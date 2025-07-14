@@ -81,6 +81,12 @@ $orders_result = $conn->query("SELECT * FROM orders ORDER BY created_at DESC");
                                             <option value="paid" <?php if($order['payment_status'] == 'paid') echo 'selected'; ?>>Paid</option>
                                             <option value="failed" <?php if($order['payment_status'] == 'failed') echo 'selected'; ?>>Failed</option>
                                         </select>
+                                        <select name="order_status" class="form-select form-select-sm me-2">
+                                            <option value="processing" <?php if($order['order_status'] == 'processing') echo 'selected'; ?>>Processing</option>
+                                            <option value="shipped" <?php if($order['order_status'] == 'shipped') echo 'selected'; ?>>Shipped</option>
+                                            <option value="completed" <?php if($order['order_status'] == 'completed') echo 'selected'; ?>>Completed</option>
+                                            <option value="cancelled" <?php if($order['order_status'] == 'cancelled') echo 'selected'; ?>>Cancelled</option>
+                                        </select>
                                         <button type="submit" class="btn btn-sm btn-success">Save</button>
                                     </form>
                                 </td>
