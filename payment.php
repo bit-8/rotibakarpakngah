@@ -40,7 +40,6 @@ $cart_details = json_decode($order['cart_details'], true);
                         <h2>Complete Your Payment</h2>
                     </div>
                     <div class="card-body p-4">
-                        <h4 class="text-center">Order #<?php echo $order['id']; ?></h4>
                         <p class="text-center text-muted">Please complete the payment of <strong>Rp <?php echo number_format($order['total_price'], 0, ',', '.'); ?></strong> using your selected method.</p>
                         
                         <hr>

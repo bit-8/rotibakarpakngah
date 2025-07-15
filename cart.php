@@ -163,7 +163,7 @@ $total_price = 0;
                                                 Cancel
                                             </a>
                                         <?php elseif ($order['payment_status'] == 'paid'): ?>
-                                            <a href="payment.php?order_id=<?php echo $order['id']; ?>" class="btn btn-info btn-sm">View Payment</a>
+                                            <button class="btn btn-success btn-sm" disabled>Done</button>
                                         <?php else: ?>
                                             <button class="btn btn-danger btn-sm" disabled>Failed</button>
                                         <?php endif; ?>
@@ -211,7 +211,7 @@ $total_price = 0;
                                         Cancel
                                     </a>
                                 <?php elseif ($order['payment_status'] == 'paid'): ?>
-                                    <a href="payment.php?order_id=<?php echo $order['id']; ?>" class="btn btn-info btn-sm">View Payment</a>
+                                    <button class="btn btn-success btn-sm" disabled>Done</button>
                                 <?php else: ?>
                                     <button class="btn btn-danger btn-sm" disabled>Failed</button>
                                 <?php endif; ?>
