@@ -14,29 +14,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $role = 'user';
 
-    // Check if username already exists
-    $check_stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
-    $check_stmt->bind_param("s", $username);
-    $check_stmt->execute();
-    $check_stmt->store_result();
-
-    if ($check_stmt->num_rows > 0) {
-        $error_message = "Username already exists. Please choose another one.";
+    if (strlen($password) < 8) {
+        $error_message = "Password must be at least 8 characters long.";
     } else {
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $conn->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $username, $hashed_password, $role);
+        // Check if username already exists
+        $check_stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
+        $check_stmt->bind_param("s", $username);
+        $check_stmt->execute();
+        $check_stmt->store_result();
 
-        if ($stmt->execute()) {
-            $_SESSION['message'] = "Registration successful! Please log in.";
-            header("Location: login.php");
-            exit();
+        if ($check_stmt->num_rows > 0) {
+            $error_message = "Username already exists. Please choose another one.";
         } else {
-            $error_message = "Error: " . $stmt->error;
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $conn->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
+            $stmt->bind_param("sss", $username, $hashed_password, $role);
+
+            if ($stmt->execute()) {
+                $_SESSION['message'] = "Registration successful! Please log in.";
+                header("Location: login.php");
+                exit();
+            } else {
+                $error_message = "Error: " . $stmt->error;
+            }
+            $stmt->close();
         }
-        $stmt->close();
+        $check_stmt->close();
     }
-    $check_stmt->close();
     $conn->close();
 }
 ?>
@@ -78,6 +82,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" class="form-control" id="password" name="password" required>
+                                <div id="passwordHelpBlock" class="form-text">
+                                    Your password must be at least 8 characters long.
+                                </div>
                             </div>
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-primary">Sign Up</button>
